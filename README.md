@@ -42,22 +42,36 @@ This project does the opposite. It takes an authentic brand origin story, scient
 ### Workflow 1: Using the Web Interface (Local or Netlify)
 
 1. **Open the App:**
-   - **Locally:** Double-click `index.html` in your browser.
+   - **Locally:** Double-click [`index.html`](file:///c:/Users/atifj/OneDrive/Desktop/Lead%20automations/index.html) in your browser.
    - **Live on Netlify:** Visit your deployed Netlify URL.
-2. **Select or Customize Your Client Profile:**
-   - Use the **"Active Client"** dropdown at the top right.
-   - Click **"Customize Client"** to update your name, title, brand origin story, phone, website, or authority partner.
-   - Or click **"+ New Client Profile"** to configure an entirely different business or agency client.
-3. **Trigger Campaign Generation:**
-   - Select your target vertical (e.g., *AAU Basketball*, *Holistic Clinics*, *Gyms & Trainers*, or *All*).
-   - Enter your target city/region (e.g. *New York NY*, *Atlanta GA*, *Chicago IL*).
-   - Choose your batch size and click **"Trigger Campaign Engine"**.
-   - Watch the **Engine Execution Monitor** log real-time discovery and sequence construction.
-4. **Inspect & Review Email Touches:**
-   - In the **Generated Prospects** table, click any business to load their sequence on the right.
-   - Toggle through **Touch 1**, **Touch 2**, **Touch 3**, and **Touch 4** to review the tailored copy.
-   - Use the **"Copy Subject"** and **"Copy Email Text"** buttons for manual 1-to-1 outreach.
-5. **Export Your Campaign:**
+
+2. **✨ Use the Gemini AI Website Analyzer (Fastest Setup):**
+   - Click the purple **"✨ AI Analyze Site"** button in the top navigation.
+   - Enter any website URL (e.g. `https://nutrientshelp.com` or any new client's domain).
+   - Enter or confirm your Gemini API key (saved securely in your browser's private `localStorage`).
+   - Click **"Run Gemini AI Analysis"**:
+     - Gemini 2.5 Flash analyzes the business in real time.
+     - Automatically identifies the founder story, product mechanics, why competitors fail, and an irresistible lead magnet.
+     - Automatically establishes **3 custom B2B Target Audiences (ICPs)** with their exact pain points.
+     - Dynamically generates full 4-step outreach sequences for that client!
+
+3. **Or Switch & Manually Customize Profiles:**
+   - Use the **"Active Client"** dropdown at the top right to switch between pre-loaded profiles (NutrientsHelp, Nexus Cybersecurity, PureSpace Facilities).
+   - Click **"Customize"** to edit any details manually, or **"+ New Profile"** to build one from scratch.
+
+4. **Trigger Campaign Generation & Monitor Progress:**
+   - Select your target audience filter or choose *All Target Audiences*.
+   - Enter your target city/region (e.g. *Metro Area*, *Atlanta GA*, *Chicago IL*).
+   - Click **"Trigger Campaign Engine"** to watch the real-time execution terminal simulate prospect matching.
+
+5. **Inspect Sequences & Use ✨ AI Polish:**
+   - Click any company in the **Generated Prospects** table.
+   - Toggle through **Touch 1**, **Touch 2**, **Touch 3**, and **Touch 4** on the right panel.
+   - Click **"✨ AI Polish Touch"** to have Gemini rewrite and sharpen any email touch on demand with conversational, high-converting copy.
+   - Use **"Copy Subject"** and **"Copy Email Text"** for manual 1-to-1 outreach.
+
+6. **Export Your Campaign:**
+   - Click **"Export CSV"** to download the complete spreadsheet pre-formatted for cold email platforms.
    - Click **"Export CSV"** to download a ready-to-import spreadsheet.
 
 ---
