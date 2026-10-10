@@ -193,12 +193,42 @@ const DEFAULT_CLIENTS = {
 };
 
 // Application State
+let geminiApiKey = localStorage.getItem("apex_gemini_api_key") || "";
+
 let clients = JSON.parse(localStorage.getItem("apex_universal_clients")) || DEFAULT_CLIENTS;
 let activeClientId = localStorage.getItem("apex_active_client_id") || "nutrientshelp";
 let currentFilter = "all";
 let searchQuery = "";
 let selectedLeadId = null;
 let selectedTouchStep = 1;
+
+// Call Google Gemini 2.5 Flash API
+async function callGeminiApi(promptText, jsonMode = false) {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`;
+  
+  const payload = {
+    contents: [{ parts: [{ text: promptText }] }],
+    generationConfig: {
+      temperature: 0.25,
+      ...(jsonMode ? { responseMimeType: "application/json" } : {})
+    }
+  };
+
+  const resp = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  if (!resp.ok) {
+    const errText = await resp.text();
+    throw new Error(`Gemini API Error (${resp.status}): ${errText}`);
+  }
+
+  const data = await resp.json();
+  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+  return rawText.trim();
+}
 
 // Universal 4-Step Sequence Generator
 function buildUniversalSequence(lead, client) {
@@ -823,6 +853,205 @@ function setupEventListeners() {
   document.getElementById("btn-save-webhook").addEventListener("click", () => {
     document.getElementById("webhook-modal").classList.remove("show");
     logTerminal("Saved Webhook / API configuration settings.", "info");
+  });
+
+  // AI Analyzer Modal Open
+  const aiModal = document.getElementById("ai-modal");
+  document.getElementById("btn-open-ai-analyzer").addEventListener("click", () => {
+    document.getElementById("ai-api-key").value = geminiApiKey;
+    aiModal.classList.add("show");
+  });
+  document.getElementById("btn-close-ai-modal").addEventListener("click", () => {
+    aiModal.classList.remove("show");
+  });
+  document.getElementById("btn-cancel-ai-modal").addEventListener("click", () => {
+    aiModal.classList.remove("show");
+  });
+
+  // Toggle API key visibility
+  const toggleKeyBtn = document.getElementById("btn-toggle-key-visibility");
+  const keyInput = document.getElementById("ai-api-key");
+  toggleKeyBtn.addEventListener("click", () => {
+    if (keyInput.type === "password") {
+      keyInput.type = "text";
+      toggleKeyBtn.textContent = "Hide";
+    } else {
+      keyInput.type = "password";
+      toggleKeyBtn.textContent = "Show";
+    }
+  });
+
+  // Run AI Analysis Handler
+  document.getElementById("btn-run-ai-analysis").addEventListener("click", async () => {
+    const targetUrl = document.getElementById("ai-target-url").value.trim();
+    const customPrompt = document.getElementById("ai-custom-prompt").value.trim();
+    const enteredKey = document.getElementById("ai-api-key").value.trim();
+
+    if (!targetUrl) {
+      alert("Please enter a website URL or business concept to analyze.");
+      return;
+    }
+
+    if (enteredKey) {
+      geminiApiKey = enteredKey;
+      localStorage.setItem("apex_gemini_api_key", geminiApiKey);
+    }
+
+    const runBtn = document.getElementById("btn-run-ai-analysis");
+    runBtn.disabled = true;
+    runBtn.innerHTML = `<span>Analyzing with Gemini 2.5 Flash...</span>`;
+
+    logTerminal(`Connecting to Google Gemini AI for URL: ${targetUrl}...`, "info");
+
+    try {
+      const prompt = `You are an elite B2B Growth Strategist and Outbound Copywriter.
+Analyze the following business and synthesize a high-converting B2B client acquisition profile.
+
+Target Input / Website:
+${targetUrl}
+${customPrompt ? "Additional Instructions: " + customPrompt : ""}
+
+Respond ONLY with a valid JSON object matching this schema (no markdown formatting, no code blocks):
+{
+  "businessName": "Clear Business Name",
+  "industry": "Specific Industry / Sector",
+  "leadName": "Founder / Lead Representative Name or Title",
+  "title": "Professional Title / Credentials",
+  "website": "${targetUrl}",
+  "phone": "(855) 000-0000",
+  "coreProduct": "Core Solution / Product Hook",
+  "story": "Concise 1-2 sentence origin story or unique credibility hook",
+  "whyFails": "1 sentence on why conventional competitors or status-quo alternatives fail or cause hidden costs",
+  "zeroFrictionCta": "A low-friction, high-value lead magnet (e.g., sample kit, free 15-min assessment, benchmark guide)",
+  "badges": ["Tag 1", "Tag 2", "Tag 3"],
+  "targetVerticals": [
+    {
+      "id": "v1",
+      "name": "High-Value B2B Target Audience 1",
+      "pain": "Specific operational or financial pain point",
+      "icon": "🎯"
+    },
+    {
+      "id": "v2",
+      "name": "High-Value B2B Target Audience 2",
+      "pain": "Specific operational or financial pain point",
+      "icon": "🚀"
+    },
+    {
+      "id": "v3",
+      "name": "High-Value B2B Target Audience 3",
+      "pain": "Specific operational or financial pain point",
+      "icon": "⚡"
+    }
+  ],
+  "leads": [
+    {
+      "id": "lead-ai-1",
+      "vertical": "v1",
+      "businessName": "Pinnacle Enterprise Group",
+      "firstName": "Marcus",
+      "lastName": "Vance",
+      "title": "Director",
+      "email": "m.vance@pinnacle-example.com",
+      "phone": "(555) 012-3456",
+      "city": "New York NY",
+      "website": "https://example.com"
+    },
+    {
+      "id": "lead-ai-2",
+      "vertical": "v2",
+      "businessName": "Summit Innovation Partners",
+      "firstName": "Sarah",
+      "lastName": "Jenkins",
+      "title": "Head of Operations",
+      "email": "sjenkins@summit-example.com",
+      "phone": "(555) 018-9922",
+      "city": "Chicago IL",
+      "website": "https://example.com"
+    }
+  ]
+}`;
+
+      logTerminal(`Sending prompt to Gemini 2.5 Flash...`, "info");
+      const resultJsonStr = await callGeminiApi(prompt, true);
+      
+      let cleanJsonStr = resultJsonStr;
+      if (cleanJsonStr.startsWith("```")) {
+        cleanJsonStr = cleanJsonStr.replace(/^```[a-z]*\n?/, "").replace(/\n?```$/, "");
+      }
+
+      const aiProfile = JSON.parse(cleanJsonStr);
+      const newClientId = "ai_" + (aiProfile.businessName || "client").toLowerCase().replace(/[^a-z0-9]/g, "");
+      aiProfile.id = newClientId;
+
+      clients[newClientId] = aiProfile;
+      localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
+
+      logTerminal(`✓ Gemini AI successfully analyzed ${aiProfile.businessName}!`, "success");
+      logTerminal(`Identified 3 target B2B audiences: ${aiProfile.targetVerticals.map(v => v.name).join(" | ")}`, "info");
+
+      aiModal.classList.remove("show");
+      renderClientSelect();
+      loadClient(newClientId);
+
+    } catch (err) {
+      console.error(err);
+      logTerminal(`[AI Error] ${err.message}`, "warning");
+      alert(`AI Analysis Error: ${err.message}`);
+    } finally {
+      runBtn.disabled = false;
+      runBtn.innerHTML = `<span>✨ Run Gemini AI Analysis</span>`;
+    }
+  });
+
+  // AI Polish Touch Handler
+  document.getElementById("btn-ai-polish-touch").addEventListener("click", async () => {
+    const polishBtn = document.getElementById("btn-ai-polish-touch");
+    const currentSubject = document.getElementById("seq-subject-input").value;
+    const currentBody = document.getElementById("seq-body-input").value;
+
+    if (!currentBody) return;
+
+    polishBtn.disabled = true;
+    polishBtn.textContent = "✨ Polishing...";
+
+    logTerminal(`Using Gemini AI to polish and sharpen Touch ${selectedTouchStep}...`, "info");
+
+    try {
+      const polishPrompt = `You are a world-class cold email copywriter with a 45%+ reply rate.
+Rewrite the following B2B email to make it sharper, more conversational, punchier, and zero-bullshit.
+Avoid corporate buzzwords, keep paragraphs under 2 sentences, and make the CTA natural and low-friction.
+
+Current Subject:
+${currentSubject}
+
+Current Body:
+${currentBody}
+
+Respond ONLY with a valid JSON object in this format (no markdown):
+{
+  "subject": "Refined punchy subject line",
+  "body": "Refined email body"
+}`;
+
+      const resStr = await callGeminiApi(polishPrompt, true);
+      let clean = resStr;
+      if (clean.startsWith("```")) {
+        clean = clean.replace(/^```[a-z]*\n?/, "").replace(/\n?```$/, "");
+      }
+      const polished = JSON.parse(clean);
+
+      document.getElementById("seq-subject-input").value = polished.subject;
+      document.getElementById("seq-body-input").value = polished.body;
+
+      logTerminal(`✓ Touch ${selectedTouchStep} polished with Gemini AI!`, "success");
+    } catch (err) {
+      console.error(err);
+      logTerminal(`[AI Error] ${err.message}`, "warning");
+    } finally {
+      polishBtn.disabled = false;
+      polishBtn.textContent = "✨ AI Polish Touch";
+    }
   });
 }
 

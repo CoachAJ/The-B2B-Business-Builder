@@ -220,6 +220,19 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-ai-gradient {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #3b82f6 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+  font-weight: 600;
+}
+
+.btn-ai-gradient:hover {
+  background: linear-gradient(135deg, #a78bfa 0%, #f472b6 50%, #60a5fa 100%);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+  transform: translateY(-1px);
+}
+
 .btn-large {
   padding: 12px 24px;
   font-size: 0.95rem;

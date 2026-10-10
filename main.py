@@ -24,10 +24,11 @@ def main():
     print("1) Generate 4-Step Email Campaign from sample leads (Fast Demo)")
     print("2) Discover New Live Leads (Web Scraper) & Generate Campaign")
     print("3) Process Custom Leads CSV")
-    print("4) Exit")
+    print("4) ✨ Analyze Website with Gemini AI & Auto-Build Campaign")
+    print("5) Exit")
     print("-" * 65)
 
-    choice = input("Enter choice (1-4) [default: 1]: ").strip() or "1"
+    choice = input("Enter choice (1-5) [default: 1]: ").strip() or "1"
 
     if choice == "1":
         leads_path = os.path.join("leads", "sample_leads.csv")
@@ -71,6 +72,30 @@ def main():
         output_path = os.path.join("campaigns", "custom_campaign.csv")
         build_campaign(leads, output_path)
         print(f"\n[DONE] Generated custom campaign saved to: {output_path}")
+
+    elif choice == "4":
+        from ai_analyzer import analyze_business_with_gemini
+        url = input("Enter website URL to analyze [default: https://nutrientshelp.com]: ").strip() or "https://nutrientshelp.com"
+        print(f"\nAnalyzing '{url}' using Gemini 2.5 Flash...")
+        result = analyze_business_with_gemini(url)
+        if result:
+            print("\n" + "=" * 50)
+            print(f"Business: {result.get('businessName')}")
+            print(f"Industry: {result.get('industry')}")
+            print(f"Core Hook: {result.get('coreProduct')}")
+            print(f"Zero-Friction CTA: {result.get('zeroFrictionCta')}")
+            print("\nTarget B2B Audiences (ICPs):")
+            for idx, v in enumerate(result.get("targetVerticals", []), 1):
+                print(f"  {idx}. {v.get('name')} -> Pain: {v.get('pain')}")
+            print("=" * 50)
+
+            sample_leads = result.get("sampleLeads", [])
+            if sample_leads:
+                output_path = os.path.join("campaigns", f"ai_{result.get('businessName', 'client')[:15].lower().replace(' ', '_')}_campaign.csv")
+                build_campaign(sample_leads, output_path)
+                print(f"\n[DONE] AI generated personalized campaign saved to: {output_path}")
+        else:
+            print("Could not complete AI analysis. Check your connection or API key.")
 
     else:
         print("Exiting.")
