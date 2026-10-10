@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexLeads B2B Automation Hub | NutrientsHelp & Client Portal</title>
+  <meta name="description" content="Turn your brand story and products into hyper-targeted B2B client acquisition campaigns with automated lead generation and personalized 4-step email sequences.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-background">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">ApexLeads <span class="badge-live">B2B ENGINE</span></h1>
+          <p class="brand-subtitle">Automated Lead Prospecting & Sequence Hub</p>
+        </div>
+      </div>
+
+      <!-- Client Profile Switcher -->
+      <div class="header-controls">
+        <div class="profile-selector-group">
+          <label for="client-profile-select">Active Client:</label>
+          <select id="client-profile-select" class="dropdown-select">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+        <button id="btn-edit-client" class="btn btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          Customize Client
+        </button>
+        <button id="btn-new-client" class="btn btn-primary-gradient">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          + New Client Profile
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="dashboard-main">
+      <!-- Quick Metric Counters -->
+      <section class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-icon icon-cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div>
+            <div class="metric-label">Active Prospects</div>
+            <div class="metric-value" id="stat-total-leads">0</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon icon-emerald">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <div class="metric-label">Emails Generated</div>
+            <div class="metric-value" id="stat-total-emails">0</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon icon-violet">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div>
+            <div class="metric-label">Campaign Verticals</div>
+            <div class="metric-value" id="stat-active-verticals">3</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon icon-amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div>
+            <div class="metric-label">Touch Cadence</div>
+            <div class="metric-value">4 Steps / Lead</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Client Summary Banner -->
+      <section class="client-banner-card" id="client-banner">
+        <div class="client-banner-header">
+          <div>
+            <span class="client-tag" id="banner-tag">ACTIVE TENANT</span>
+            <h2 class="client-name" id="banner-client-name">NutrientsHelp (Coach AJ)</h2>
+            <p class="client-sub" id="banner-client-desc">Certified Wholistic Health Coach & Independent Youngevity Distributor #102742703</p>
+          </div>
+          <div class="client-badges" id="banner-badges">
+            <span class="badge">Rebound FX</span>
+            <span class="badge">90 Essential Nutrients</span>
+            <span class="badge">Pharmacist Ben Fuchs</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions & Trigger Bar -->
+      <section class="action-grid">
+        <!-- Trigger Card -->
+        <div class="card trigger-card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Launch Campaign Generator</h3>
+              <p class="card-sub">Generate tailored 4-step outreach across your target ICPs</p>
+            </div>
+            <span class="status-indicator ready"><span class="dot"></span> Engine Idle</span>
+          </div>
+
+          <div class="trigger-form-grid">
+            <div class="input-group">
+              <label for="select-vertical">Select Vertical Target:</label>
+              <select id="select-vertical" class="dropdown-select">
+                <option value="all">⚡ All Client Verticals (Combined)</option>
+                <option value="aau_basketball">🏀 Youth Basketball Academies & AAU Programs</option>
+                <option value="holistic_clinics">🩺 Holistic Clinics & Chiropractic Centers</option>
+                <option value="gyms_trainers">🏋️ Boutique Gyms & Athletic Trainers</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="input-target-city">Target City / Region:</label>
+              <input type="text" id="input-target-city" class="text-input" value="New York & Metro Area" placeholder="e.g. Atlanta GA, Chicago IL, National">
+            </div>
+
+            <div class="input-group">
+              <label for="input-lead-count">Prospect Batch Size:</label>
+              <select id="input-lead-count" class="dropdown-select">
+                <option value="default">Use Curated Active Batch (7 Leads)</option>
+                <option value="expand">Expand to 15 Qualified Leads</option>
+                <option value="full">Full Scale Batch (25 Leads)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="trigger-actions">
+            <button id="btn-trigger-engine" class="btn btn-primary-gradient btn-large">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span>Trigger Campaign Engine</span>
+            </button>
+            <button id="btn-add-lead-manual" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Quick Add Lead
+            </button>
+            <button id="btn-webhook-config" class="btn btn-ghost" title="Webhook & API integrations">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              Webhook / Netlify API
+            </button>
+          </div>
+
+          <!-- Real-Time Activity Terminal / Log -->
+          <div class="terminal-container" id="terminal-box">
+            <div class="terminal-bar">
+              <span class="term-dot red"></span>
+              <span class="term-dot yellow"></span>
+              <span class="term-dot green"></span>
+              <span class="term-title">Engine Execution Monitor</span>
+              <button id="btn-clear-term" class="term-clear">Clear</button>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+              <div class="term-line success">✓ Engine initialized. Connected to NutrientsHelp automation core.</div>
+              <div class="term-line info">ℹ Ready to synthesize lead data and build 4-touch sequences.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leads & Campaign Inspection Area -->
+      <section class="card leads-card">
+        <div class="card-header leads-header">
+          <div>
+            <h3 class="card-title">Generated Prospects & Sequences</h3>
+            <p class="card-sub">Select any prospect to inspect their personalized 4-step sequence</p>
+          </div>
+          <div class="leads-export-actions">
+            <div class="search-wrap">
+              <input type="text" id="lead-search-input" class="text-input search-input" placeholder="Search by name, clinic, city...">
+            </div>
+            <button id="btn-export-csv" class="btn btn-success">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Export CSV (Instantly / Smartlead / Apollo)
+            </button>
+            <button id="btn-export-json" class="btn btn-secondary">
+              Export JSON
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="filter-pills">
+          <button class="pill active" data-filter="all">All Leads (<span id="count-all">0</span>)</button>
+          <button class="pill" data-filter="aau_basketball">🏀 Basketball / AAU (<span id="count-aau">0</span>)</button>
+          <button class="pill" data-filter="holistic_clinics">🩺 Holistic Clinics (<span id="count-clinics">0</span>)</button>
+          <button class="pill" data-filter="gyms_trainers">🏋️ Gyms & Trainers (<span id="count-gyms">0</span>)</button>
+        </div>
+
+        <!-- Leads Table / Split Inspector -->
+        <div class="inspector-split">
+          <!-- Left: Table of Leads -->
+          <div class="leads-table-wrap">
+            <table class="leads-table" id="leads-table">
+              <thead>
+                <tr>
+                  <th>Target Business</th>
+                  <th>Key Contact</th>
+                  <th>Vertical</th>
+                  <th>City</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="leads-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Right: Email Sequence Preview Panel -->
+          <div class="sequence-panel" id="sequence-panel">
+            <div class="seq-panel-header">
+              <div class="seq-target-info">
+                <span class="badge" id="seq-vertical-badge">AAU BASKETBALL</span>
+                <h4 id="seq-target-name">Select a prospect on the left</h4>
+                <p id="seq-target-contact" class="seq-sub">Contact details will appear here</p>
+              </div>
+            </div>
+
+            <!-- Sequence Step Tabs -->
+            <div class="seq-tabs">
+              <button class="seq-tab active" data-step="1">Touch 1 (The Hook)</button>
+              <button class="seq-tab" data-step="2">Touch 2 (The Science)</button>
+              <button class="seq-tab" data-step="3">Touch 3 (The Offer)</button>
+              <button class="seq-tab" data-step="4">Touch 4 (Exit)</button>
+            </div>
+
+            <!-- Email Display -->
+            <div class="seq-email-content">
+              <div class="email-field-row">
+                <span class="email-label">Subject:</span>
+                <input type="text" id="seq-subject-input" class="email-subject-field" readonly>
+                <button id="btn-copy-subject" class="btn-icon" title="Copy Subject">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+
+              <div class="email-body-wrap">
+                <textarea id="seq-body-input" class="email-body-field" rows="11" readonly></textarea>
+                <div class="email-footer-actions">
+                  <span class="email-tag-indicator" id="seq-step-indicator">Touch 1 of 4 • Day 1 Send</span>
+                  <button id="btn-copy-body" class="btn btn-secondary btn-small">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy Email Text
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <p>Built for <strong>Coach AJ (NutrientsHelp)</strong> & B2B Client Acquisition • Ready for Netlify Deployment via GitHub</p>
+        <div class="footer-links">
+          <a href="https://nutrientshelp.com" target="_blank" rel="noopener">nutrientshelp.com ↗</a>
+          <span class="sep">•</span>
+          <a href="B2B_STRATEGY_PLAYBOOK.md" target="_blank">Strategy Playbook</a>
+          <span class="sep">•</span>
+          <a href="https://github.com" target="_blank" rel="noopener">GitHub Ready</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal: Customize or Add Client Profile -->
+  <div class="modal-backdrop" id="client-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-client-title">Customize Client Profile</h3>
+        <button id="btn-close-modal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cust-business-name">Business / Brand Name</label>
+            <input type="text" id="cust-business-name" class="text-input" placeholder="e.g. NutrientsHelp">
+          </div>
+          <div class="form-group">
+            <label for="cust-lead-name">Founder / Coach / Representative</label>
+            <input type="text" id="cust-lead-name" class="text-input" placeholder="e.g. Coach AJ">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cust-website">Website URL</label>
+            <input type="text" id="cust-website" class="text-input" placeholder="e.g. nutrientshelp.com">
+          </div>
+          <div class="form-group">
+            <label for="cust-phone">Direct Phone / Hotline</label>
+            <input type="text" id="cust-phone" class="text-input" placeholder="e.g. (855) 835-2777">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cust-title">Title & Credentials</label>
+          <input type="text" id="cust-title" class="text-input" placeholder="e.g. Certified Wholistic Health Coach & Independent Youngevity Distributor #102742703">
+        </div>
+
+        <div class="form-group">
+          <label for="cust-story">Origin Story / Core Credibility Angle</label>
+          <textarea id="cust-story" class="text-input textarea-input" rows="2" placeholder="e.g. Growing up playing basketball in Harlem with frequent muscle cramps..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cust-core-product">Core Product Hook</label>
+            <input type="text" id="cust-core-product" class="text-input" placeholder="e.g. Rebound FX & 90 Essential Nutrients">
+          </div>
+          <div class="form-group">
+            <label for="cust-authority">Authority Partner / Clinical Scientific Backing</label>
+            <input type="text" id="cust-authority" class="text-input" placeholder="e.g. Registered Pharmacist Ben Fuchs">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-modal" class="btn btn-ghost">Cancel</button>
+        <button id="btn-save-client" class="btn btn-primary-gradient">Save & Apply Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Quick Add Lead -->
+  <div class="modal-backdrop" id="lead-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Prospect Manually</h3>
+        <button id="btn-close-lead-modal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="new-business-name">Facility / Business Name</label>
+            <input type="text" id="new-business-name" class="text-input" placeholder="e.g. Brooklyn Elite Basketball Academy">
+          </div>
+          <div class="form-group">
+            <label for="new-vertical">Vertical</label>
+            <select id="new-vertical" class="dropdown-select">
+              <option value="aau_basketball">🏀 Youth Basketball / AAU</option>
+              <option value="holistic_clinics">🩺 Holistic Clinic / Chiropractic</option>
+              <option value="gyms_trainers">🏋️ Boutique Gym / Trainer</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="new-first-name">Contact First Name</label>
+            <input type="text" id="new-first-name" class="text-input" placeholder="e.g. Marcus">
+          </div>
+          <div class="form-group">
+            <label for="new-last-name">Contact Last Name</label>
+            <input type="text" id="new-last-name" class="text-input" placeholder="e.g. Johnson">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="new-email">Email Address</label>
+            <input type="email" id="new-email" class="text-input" placeholder="e.g. coach@brooklynelite.com">
+          </div>
+          <div class="form-group">
+            <label for="new-city">City & State</label>
+            <input type="text" id="new-city" class="text-input" placeholder="e.g. Brooklyn NY">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-lead-modal" class="btn btn-ghost">Cancel</button>
+        <button id="btn-save-new-lead" class="btn btn-primary-gradient">Add Prospect & Build Sequence</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Webhook & Netlify Integrations -->
+  <div class="modal-backdrop" id="webhook-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Webhooks & Netlify Functions</h3>
+        <button id="btn-close-webhook-modal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Connect this front-end to your automated sending platforms, Zapier, Make.com, or Netlify Serverless Functions.</p>
+        
+        <div class="form-group">
+          <label for="webhook-url">Outbound Trigger Webhook URL</label>
+          <input type="url" id="webhook-url" class="text-input" placeholder="https://hooks.zapier.com/hooks/catch/... or Netlify Function endpoint">
+        </div>
+
+        <div class="integration-guide">
+          <h5>Direct Sending Stack Integration:</h5>
+          <ul>
+            <li><strong>Instantly / Smartlead:</strong> Download the exported CSV from the dashboard and drag it into your active campaign.</li>
+            <li><strong>Apollo.io:</strong> Import the CSV as a contact list with custom attributes <code>{{email_1_body}}</code>, etc.</li>
+            <li><strong>Netlify Functions:</strong> Use <code>/.netlify/functions/trigger-leads</code> to invoke a headless runner.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-save-webhook" class="btn btn-primary-gradient">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application JS Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
