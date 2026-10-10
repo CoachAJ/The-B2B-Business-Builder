@@ -187,6 +187,64 @@ Keep raising the bar!
 Best,  
 Coach AJ"""
         }
+    },
+    "universal_b2b": {
+        "step1": {
+            "subject": "Quick question regarding {business_name}",
+            "body": """Hey {salutation},
+
+Noticed the strong work you and your team are doing at {business_name}.
+
+Reaching out because we partner with growing organizations in your sector to solve operational bottlenecks and eliminate unnecessary vendor overhead.
+
+We specialize in high-efficiency solutions built specifically to deliver measurable results without upfront disruption.
+
+Would you be open to a complimentary 10-minute briefing or quick benchmark review for {business_name}?
+
+Best regards,  
+Lead Partnerships Team"""
+        },
+        "step2": {
+            "subject": "Why conventional alternatives create hidden costs",
+            "body": """Hey {salutation},
+
+Quick follow up on my note from earlier this week.
+
+Most standard providers in this space charge heavy upfront fees or deliver rigid legacy systems that take months to see ROI.
+
+By contrast, our approach addresses root challenges directly with zero operational downtime.
+
+Would you be open to reviewing a quick 1-page comparison breakdown for {business_name}?
+
+Best regards,  
+Lead Partnerships Team"""
+        },
+        "step3": {
+            "subject": "Low-friction pilot for {business_name}",
+            "body": """Hey {salutation},
+
+One thing leaders often tell us is that they want to improve results, but cannot afford the friction of a complex transition.
+
+That's why we designed a simple, zero-risk evaluation process that lets you validate performance before making any commitment.
+
+Would a brief conversation next week make sense to see if this fits your current roadmap?
+
+Best regards,  
+Lead Partnerships Team"""
+        },
+        "step4": {
+            "subject": "Permission to close your file, {salutation}?",
+            "body": """Hey {salutation},
+
+I know you're managing multiple priorities, so I won't crowd your inbox.
+
+If this isn't on your radar right now, no problem at all. If priorities shift in the future, please feel free to reach back out.
+
+Wishing you and {business_name} continued success!
+
+Best regards,  
+Lead Partnerships Team"""
+        }
     }
 }
 
@@ -222,8 +280,8 @@ def build_campaign(leads: List[Dict[str, str]], output_csv_path: str):
     rendered_rows = []
 
     for lead in leads:
-        vertical = lead.get("vertical", "aau_basketball")
-        templates = TEMPLATES.get(vertical, TEMPLATES["aau_basketball"])
+        vertical = lead.get("vertical", "universal_b2b")
+        templates = TEMPLATES.get(vertical, TEMPLATES["universal_b2b"])
         
         business_name = lead.get("business_name") or "your facility"
         salutation = format_salutation(lead)

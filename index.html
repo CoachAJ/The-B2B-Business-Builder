@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ApexLeads B2B Automation Hub | NutrientsHelp & Client Portal</title>
-  <meta name="description" content="Turn your brand story and products into hyper-targeted B2B client acquisition campaigns with automated lead generation and personalized 4-step email sequences.">
+  <title>The B2B Business Builder | Universal Client Acquisition Hub</title>
+  <meta name="description" content="Universal B2B lead generation and targeted outreach engine. Adaptable to any industry, founder story, product offer, or target client audience.">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,8 +30,8 @@
           </svg>
         </div>
         <div>
-          <h1 class="brand-title">ApexLeads <span class="badge-live">B2B ENGINE</span></h1>
-          <p class="brand-subtitle">Automated Lead Prospecting & Sequence Hub</p>
+          <h1 class="brand-title">The B2B Business Builder <span class="badge-live">UNIVERSAL ENGINE</span></h1>
+          <p class="brand-subtitle">Industry-Agnostic Lead Prospecting & Sequence Hub</p>
         </div>
       </div>
 
@@ -40,7 +40,7 @@
         <div class="profile-selector-group">
           <label for="client-profile-select">Active Client:</label>
           <select id="client-profile-select" class="dropdown-select">
-            <!-- Populated via JS -->
+            <!-- Populated via JS across multiple industries -->
           </select>
         </div>
         <button id="btn-edit-client" class="btn btn-secondary">
@@ -83,7 +83,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </div>
           <div>
-            <div class="metric-label">Campaign Verticals</div>
+            <div class="metric-label">Target Audiences (ICPs)</div>
             <div class="metric-value" id="stat-active-verticals">3</div>
           </div>
         </div>
@@ -103,14 +103,15 @@
       <section class="client-banner-card" id="client-banner">
         <div class="client-banner-header">
           <div>
-            <span class="client-tag" id="banner-tag">ACTIVE TENANT</span>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="client-tag" id="banner-tag">ACTIVE TENANT</span>
+              <span class="client-industry-badge" id="banner-industry">Wellness & Sports</span>
+            </div>
             <h2 class="client-name" id="banner-client-name">NutrientsHelp (Coach AJ)</h2>
             <p class="client-sub" id="banner-client-desc">Certified Wholistic Health Coach & Independent Youngevity Distributor #102742703</p>
           </div>
           <div class="client-badges" id="banner-badges">
-            <span class="badge">Rebound FX</span>
-            <span class="badge">90 Essential Nutrients</span>
-            <span class="badge">Pharmacist Ben Fuchs</span>
+            <!-- Badges injected dynamically -->
           </div>
         </div>
       </section>
@@ -131,24 +132,20 @@
             <div class="input-group">
               <label for="select-vertical">Select Vertical Target:</label>
               <select id="select-vertical" class="dropdown-select">
-                <option value="all">⚡ All Client Verticals (Combined)</option>
-                <option value="aau_basketball">🏀 Youth Basketball Academies & AAU Programs</option>
-                <option value="holistic_clinics">🩺 Holistic Clinics & Chiropractic Centers</option>
-                <option value="gyms_trainers">🏋️ Boutique Gyms & Athletic Trainers</option>
+                <!-- Dynamically populated from active client's ICPs -->
               </select>
             </div>
 
             <div class="input-group">
               <label for="input-target-city">Target City / Region:</label>
-              <input type="text" id="input-target-city" class="text-input" value="New York & Metro Area" placeholder="e.g. Atlanta GA, Chicago IL, National">
+              <input type="text" id="input-target-city" class="text-input" value="Metro Area" placeholder="e.g. New York NY, Atlanta GA, Chicago IL, National">
             </div>
 
             <div class="input-group">
               <label for="input-lead-count">Prospect Batch Size:</label>
               <select id="input-lead-count" class="dropdown-select">
-                <option value="default">Use Curated Active Batch (7 Leads)</option>
-                <option value="expand">Expand to 15 Qualified Leads</option>
-                <option value="full">Full Scale Batch (25 Leads)</option>
+                <option value="default">Use Active Qualified Batch</option>
+                <option value="expand">Expand Batch with New Discovery</option>
               </select>
             </div>
           </div>
@@ -178,8 +175,8 @@
               <button id="btn-clear-term" class="term-clear">Clear</button>
             </div>
             <div class="terminal-body" id="terminal-body">
-              <div class="term-line success">✓ Engine initialized. Connected to NutrientsHelp automation core.</div>
-              <div class="term-line info">ℹ Ready to synthesize lead data and build 4-touch sequences.</div>
+              <div class="term-line success">✓ Universal Engine initialized. Ready to generate campaigns for any industry.</div>
+              <div class="term-line info">ℹ Select an active client above to load specific target audiences and customized sequences.</div>
             </div>
           </div>
         </div>
@@ -194,7 +191,7 @@
           </div>
           <div class="leads-export-actions">
             <div class="search-wrap">
-              <input type="text" id="lead-search-input" class="text-input search-input" placeholder="Search by name, clinic, city...">
+              <input type="text" id="lead-search-input" class="text-input search-input" placeholder="Search by name, company, city...">
             </div>
             <button id="btn-export-csv" class="btn btn-success">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -206,12 +203,9 @@
           </div>
         </div>
 
-        <!-- Filter Pills -->
-        <div class="filter-pills">
-          <button class="pill active" data-filter="all">All Leads (<span id="count-all">0</span>)</button>
-          <button class="pill" data-filter="aau_basketball">🏀 Basketball / AAU (<span id="count-aau">0</span>)</button>
-          <button class="pill" data-filter="holistic_clinics">🩺 Holistic Clinics (<span id="count-clinics">0</span>)</button>
-          <button class="pill" data-filter="gyms_trainers">🏋️ Gyms & Trainers (<span id="count-gyms">0</span>)</button>
+        <!-- Filter Pills (Injected Dynamically from Active Client Verticals) -->
+        <div class="filter-pills" id="dynamic-filter-pills">
+          <!-- Populated via JS -->
         </div>
 
         <!-- Leads Table / Split Inspector -->
@@ -223,7 +217,7 @@
                 <tr>
                   <th>Target Business</th>
                   <th>Key Contact</th>
-                  <th>Vertical</th>
+                  <th>Target Audience</th>
                   <th>City</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -239,7 +233,7 @@
           <div class="sequence-panel" id="sequence-panel">
             <div class="seq-panel-header">
               <div class="seq-target-info">
-                <span class="badge" id="seq-vertical-badge">AAU BASKETBALL</span>
+                <span class="badge" id="seq-vertical-badge">TARGET AUDIENCE</span>
                 <h4 id="seq-target-name">Select a prospect on the left</h4>
                 <p id="seq-target-contact" class="seq-sub">Contact details will appear here</p>
               </div>
@@ -248,7 +242,7 @@
             <!-- Sequence Step Tabs -->
             <div class="seq-tabs">
               <button class="seq-tab active" data-step="1">Touch 1 (The Hook)</button>
-              <button class="seq-tab" data-step="2">Touch 2 (The Science)</button>
+              <button class="seq-tab" data-step="2">Touch 2 (The Breakdown)</button>
               <button class="seq-tab" data-step="3">Touch 3 (The Offer)</button>
               <button class="seq-tab" data-step="4">Touch 4 (Exit)</button>
             </div>
@@ -264,7 +258,7 @@
               </div>
 
               <div class="email-body-wrap">
-                <textarea id="seq-body-input" class="email-body-field" rows="11" readonly></textarea>
+                <textarea id="seq-body-input" class="email-body-field" rows="12" readonly></textarea>
                 <div class="email-footer-actions">
                   <span class="email-tag-indicator" id="seq-step-indicator">Touch 1 of 4 • Day 1 Send</span>
                   <button id="btn-copy-body" class="btn btn-secondary btn-small">
@@ -282,13 +276,11 @@
     <!-- Footer -->
     <footer class="app-footer">
       <div class="footer-content">
-        <p>Built for <strong>Coach AJ (NutrientsHelp)</strong> & B2B Client Acquisition • Ready for Netlify Deployment via GitHub</p>
+        <p><strong>The B2B Business Builder</strong> • Universal Multi-Tenant Lead Engine • Ready for Netlify Deployment via GitHub</p>
         <div class="footer-links">
-          <a href="https://nutrientshelp.com" target="_blank" rel="noopener">nutrientshelp.com ↗</a>
+          <a href="https://github.com/CoachAJ/The-B2B-Business-Builder" target="_blank" rel="noopener">GitHub Repository ↗</a>
           <span class="sep">•</span>
           <a href="B2B_STRATEGY_PLAYBOOK.md" target="_blank">Strategy Playbook</a>
-          <span class="sep">•</span>
-          <a href="https://github.com" target="_blank" rel="noopener">GitHub Ready</a>
         </div>
       </div>
     </footer>
@@ -296,7 +288,7 @@
 
   <!-- Modal: Customize or Add Client Profile -->
   <div class="modal-backdrop" id="client-modal">
-    <div class="modal-card">
+    <div class="modal-card modal-large">
       <div class="modal-header">
         <h3 id="modal-client-title">Customize Client Profile</h3>
         <button id="btn-close-modal" class="modal-close">&times;</button>
@@ -305,43 +297,87 @@
         <div class="form-row">
           <div class="form-group">
             <label for="cust-business-name">Business / Brand Name</label>
-            <input type="text" id="cust-business-name" class="text-input" placeholder="e.g. NutrientsHelp">
+            <input type="text" id="cust-business-name" class="text-input" placeholder="e.g. Apex Cloud Solutions or NutrientsHelp">
           </div>
           <div class="form-group">
-            <label for="cust-lead-name">Founder / Coach / Representative</label>
-            <input type="text" id="cust-lead-name" class="text-input" placeholder="e.g. Coach AJ">
+            <label for="cust-industry">Industry / Sector</label>
+            <input type="text" id="cust-industry" class="text-input" placeholder="e.g. IT & Cybersecurity, Commercial Services, Accounting, Health">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cust-lead-name">Founder / Consultant / Representative</label>
+            <input type="text" id="cust-lead-name" class="text-input" placeholder="e.g. Marcus Chen, Coach AJ, Elena Vance">
+          </div>
+          <div class="form-group">
+            <label for="cust-title">Title / Role</label>
+            <input type="text" id="cust-title" class="text-input" placeholder="e.g. Managing Director, Wholistic Health Coach, Principal Consultant">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="cust-website">Website URL</label>
-            <input type="text" id="cust-website" class="text-input" placeholder="e.g. nutrientshelp.com">
+            <input type="text" id="cust-website" class="text-input" placeholder="e.g. apexcloud.io or nutrientshelp.com">
           </div>
           <div class="form-group">
             <label for="cust-phone">Direct Phone / Hotline</label>
-            <input type="text" id="cust-phone" class="text-input" placeholder="e.g. (855) 835-2777">
+            <input type="text" id="cust-phone" class="text-input" placeholder="e.g. (800) 555-0199">
           </div>
         </div>
 
         <div class="form-group">
-          <label for="cust-title">Title & Credentials</label>
-          <input type="text" id="cust-title" class="text-input" placeholder="e.g. Certified Wholistic Health Coach & Independent Youngevity Distributor #102742703">
+          <label for="cust-core-product">Core Offer / Solution</label>
+          <input type="text" id="cust-core-product" class="text-input" placeholder="e.g. Zero-Trust Cloud Security Architecture, Rebound FX Hydration, Eco-Certified Office Care">
         </div>
 
         <div class="form-group">
-          <label for="cust-story">Origin Story / Core Credibility Angle</label>
-          <textarea id="cust-story" class="text-input textarea-input" rows="2" placeholder="e.g. Growing up playing basketball in Harlem with frequent muscle cramps..."></textarea>
+          <label for="cust-story">Origin Story / Unique Credibility Hook</label>
+          <textarea id="cust-story" class="text-input textarea-input" rows="2" placeholder="e.g. After recovering enterprise systems from multimillion-dollar ransomware attacks, I noticed boutique firms are left completely defenseless by standard antivirus..."></textarea>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="cust-core-product">Core Product Hook</label>
-            <input type="text" id="cust-core-product" class="text-input" placeholder="e.g. Rebound FX & 90 Essential Nutrients">
+        <div class="form-group">
+          <label for="cust-why-fails">Why Standard Alternatives in the Industry Fail</label>
+          <input type="text" id="cust-why-fails" class="text-input" placeholder="e.g. Most IT firms only sell hourly reactive tickets, leaving systems exposed until disaster strikes.">
+        </div>
+
+        <div class="form-group">
+          <label for="cust-cta">Zero-Friction Offer (Lead Magnet / CTA)</label>
+          <input type="text" id="cust-cta" class="text-input" placeholder="e.g. a 15-minute complimentary security vulnerability audit, sample pack, 1-page pricing guide">
+        </div>
+
+        <div class="custom-verticals-box">
+          <h5 style="margin-bottom:8px; color:#e2e8f0; font-size:0.85rem;">Target Audiences (3 Primary ICPs)</h5>
+          <div class="form-row" style="margin-bottom:8px;">
+            <div class="form-group">
+              <label for="cust-v1-name">Target Audience 1 Name</label>
+              <input type="text" id="cust-v1-name" class="text-input" placeholder="e.g. Boutique Law Firms or Youth Basketball Academies">
+            </div>
+            <div class="form-group">
+              <label for="cust-v1-pain">Target 1 Specific Pain Point</label>
+              <input type="text" id="cust-v1-pain" class="text-input" placeholder="e.g. client data confidentiality & wire fraud or late-game muscle cramps">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="cust-authority">Authority Partner / Clinical Scientific Backing</label>
-            <input type="text" id="cust-authority" class="text-input" placeholder="e.g. Registered Pharmacist Ben Fuchs">
+          <div class="form-row" style="margin-bottom:8px;">
+            <div class="form-group">
+              <label for="cust-v2-name">Target Audience 2 Name</label>
+              <input type="text" id="cust-v2-name" class="text-input" placeholder="e.g. Wealth Management & CPA Firms or Chiropractic Clinics">
+            </div>
+            <div class="form-group">
+              <label for="cust-v2-pain">Target 2 Specific Pain Point</label>
+              <input type="text" id="cust-v2-pain" class="text-input" placeholder="e.g. compliance fines & downtime or structural adjustments not holding">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cust-v3-name">Target Audience 3 Name</label>
+              <input type="text" id="cust-v3-name" class="text-input" placeholder="e.g. Regional Medical Practices or Boutique Gyms">
+            </div>
+            <div class="form-group">
+              <label for="cust-v3-pain">Target 3 Specific Pain Point</label>
+              <input type="text" id="cust-v3-pain" class="text-input" placeholder="e.g. HIPAA audit risks or monetizing member nutrition questions">
+            </div>
           </div>
         </div>
       </div>
@@ -362,15 +398,13 @@
       <div class="modal-body">
         <div class="form-row">
           <div class="form-group">
-            <label for="new-business-name">Facility / Business Name</label>
-            <input type="text" id="new-business-name" class="text-input" placeholder="e.g. Brooklyn Elite Basketball Academy">
+            <label for="new-business-name">Business / Company Name</label>
+            <input type="text" id="new-business-name" class="text-input" placeholder="e.g. Sterling Legal Partners">
           </div>
           <div class="form-group">
-            <label for="new-vertical">Vertical</label>
+            <label for="new-vertical">Target Audience (ICP)</label>
             <select id="new-vertical" class="dropdown-select">
-              <option value="aau_basketball">🏀 Youth Basketball / AAU</option>
-              <option value="holistic_clinics">🩺 Holistic Clinic / Chiropractic</option>
-              <option value="gyms_trainers">🏋️ Boutique Gym / Trainer</option>
+              <!-- Populated dynamically -->
             </select>
           </div>
         </div>
@@ -378,22 +412,22 @@
         <div class="form-row">
           <div class="form-group">
             <label for="new-first-name">Contact First Name</label>
-            <input type="text" id="new-first-name" class="text-input" placeholder="e.g. Marcus">
+            <input type="text" id="new-first-name" class="text-input" placeholder="e.g. Robert">
           </div>
           <div class="form-group">
             <label for="new-last-name">Contact Last Name</label>
-            <input type="text" id="new-last-name" class="text-input" placeholder="e.g. Johnson">
+            <input type="text" id="new-last-name" class="text-input" placeholder="e.g. Sterling">
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="new-email">Email Address</label>
-            <input type="email" id="new-email" class="text-input" placeholder="e.g. coach@brooklynelite.com">
+            <input type="email" id="new-email" class="text-input" placeholder="e.g. rsterling@sterlinglegal.com">
           </div>
           <div class="form-group">
             <label for="new-city">City & State</label>
-            <input type="text" id="new-city" class="text-input" placeholder="e.g. Brooklyn NY">
+            <input type="text" id="new-city" class="text-input" placeholder="e.g. Chicago IL">
           </div>
         </div>
       </div>
@@ -424,7 +458,7 @@
           <ul>
             <li><strong>Instantly / Smartlead:</strong> Download the exported CSV from the dashboard and drag it into your active campaign.</li>
             <li><strong>Apollo.io:</strong> Import the CSV as a contact list with custom attributes <code>{{email_1_body}}</code>, etc.</li>
-            <li><strong>Netlify Functions:</strong> Use <code>/.netlify/functions/trigger-leads</code> to invoke a headless runner.</li>
+            <li><strong>Universal Adaptability:</strong> Switch to any industry client to export completely customized sequences.</li>
           </ul>
         </div>
       </div>
