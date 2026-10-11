@@ -43,6 +43,10 @@
             <!-- Populated via JS across multiple industries -->
           </select>
         </div>
+        <button id="btn-open-api-settings" class="btn btn-secondary" title="Configure Live B2B APIs (Hunter.io, Google Places, Apollo, OpenCorporates)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          API Integrations
+        </button>
         <button id="btn-open-ai-analyzer" class="btn btn-ai-gradient">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           âœ¨ AI Analyze Site
@@ -201,6 +205,22 @@
             <p class="card-sub">Select any prospect to inspect their personalized 4-step sequence</p>
           </div>
           <div class="leads-export-actions">
+            <div class="lead-mode-badge-wrap">
+              <span id="lead-mode-badge" class="badge-pill badge-demo" title="Currently showing sample contacts">DEMO / SAMPLE MODE</span>
+            </div>
+            <button id="btn-live-discover" class="btn btn-primary-gradient" title="Discover real businesses via Google Places or OpenCorporates registries">
+              ⚡ Live Business Discovery
+            </button>
+            <button id="btn-enrich-hunter" class="btn btn-ai-gradient" title="Enrich contacts with Hunter.io or generate domain email permutations">
+              🔍 Enrich & Verify Emails
+            </button>
+            <button id="btn-import-csv" class="btn btn-secondary" title="Import CSV from Apollo, ZoomInfo, Clay, or State SOS registry">
+              📂 Import CSV
+            </button>
+            <input type="file" id="csv-file-input" accept=".csv" style="display:none;" />
+            <button id="btn-clear-demo-leads" class="btn btn-ghost" title="Clear all demo / sample leads to start clean">
+              🗑️ Clear Leads
+            </button>
             <div class="search-wrap">
               <input type="text" id="lead-search-input" class="text-input search-input" placeholder="Search by name, company, city...">
             </div>
@@ -557,6 +577,188 @@
         <button id="btn-save-categories" class="btn btn-primary-gradient">
           ✓ Apply Selected Categories
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: API Integrations & Live Data Sources -->
+  <div class="modal-backdrop" id="api-settings-modal">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <div>
+          <h3>🔌 Live B2B Data & Enrichment Integrations</h3>
+          <p class="modal-sub">Connect public registries and proprietary B2B contact APIs</p>
+        </div>
+        <button id="btn-close-api-modal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="api-notice-banner">
+          <div class="notice-icon">💡</div>
+          <div>
+            <strong>Firmographic vs. Direct Contact Data Architecture:</strong>
+            <p>Our pipeline separates <em>Legal Public Registries</em> (OpenCorporates, SEC EDGAR, State SOS dumps) from <em>Direct B2B Contact Resolvers</em> (Hunter.io, Apollo). Keys are stored locally in your browser's private storage.</p>
+          </div>
+        </div>
+
+        <div class="api-section-grid">
+          <!-- Google Places API -->
+          <div class="api-card">
+            <div class="api-card-header">
+              <span class="api-service-tag tag-blue">Real Business Discovery</span>
+              <h4>Google Places / Maps API</h4>
+            </div>
+            <p class="api-card-desc">Pulls verified physical businesses, direct phone numbers, website domains, and HQ addresses by keyword and target city.</p>
+            <div class="input-group">
+              <label for="input-google-places-key">Google Places API Key:</label>
+              <input type="password" id="input-google-places-key" class="text-input" placeholder="AIzaSy...">
+            </div>
+            <small class="api-meta">Free Tier: $200/mo free Google Cloud credit (40k+ searches/mo).</small>
+          </div>
+
+          <!-- Hunter.io API -->
+          <div class="api-card">
+            <div class="api-card-header">
+              <span class="api-service-tag tag-orange">Direct Email Enrichment</span>
+              <h4>Hunter.io API</h4>
+            </div>
+            <p class="api-card-desc">Resolves decision-maker emails, corporate email patterns ({first}.{last}@domain.com), and SMTP deliverability verification directly from corporate domains.</p>
+            <div class="input-group">
+              <label for="input-hunter-key">Hunter.io API Key:</label>
+              <input type="password" id="input-hunter-key" class="text-input" placeholder="e.g. 9f482a...">
+            </div>
+            <small class="api-meta">Free Tier: 50 free searches / 100 verifications per month.</small>
+          </div>
+
+          <!-- OpenCorporates API -->
+          <div class="api-card">
+            <div class="api-card-header">
+              <span class="api-service-tag tag-green">Legal Public Registry</span>
+              <h4>OpenCorporates API</h4>
+            </div>
+            <p class="api-card-desc">World's largest open corporate registry (100M+ companies). Verifies official corporate officers, registered agents, legal status, and filing jurisdiction.</p>
+            <div class="input-group">
+              <label for="input-opencorporates-key">OpenCorporates API Key (Optional):</label>
+              <input type="password" id="input-opencorporates-key" class="text-input" placeholder="Leave empty for public tier">
+            </div>
+            <small class="api-meta">Has generous free tier for standard queries and non-commercial usage.</small>
+          </div>
+
+          <!-- Apollo.io API -->
+          <div class="api-card">
+            <div class="api-card-header">
+              <span class="api-service-tag tag-purple">B2B Contacts & Mobile</span>
+              <h4>Apollo.io API</h4>
+            </div>
+            <p class="api-card-desc">Enriches decision-maker names with verified corporate work emails, direct mobile dials, and company employee counts across 275M+ professionals.</p>
+            <div class="input-group">
+              <label for="input-apollo-key">Apollo.io API Key:</label>
+              <input type="password" id="input-apollo-key" class="text-input" placeholder="e.g. apollo_api_key_...">
+            </div>
+            <small class="api-meta">Connect your Apollo developer key for direct enrichment.</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-api-settings" class="btn btn-ghost">Cancel</button>
+        <button id="btn-save-api-settings" class="btn btn-primary-gradient">✓ Save API Keys (Local Storage)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Live Business Discovery Engine -->
+  <div class="modal-backdrop" id="live-discovery-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>⚡ Live Business Discovery Pipeline</h3>
+          <p class="modal-sub">Fetch real business entities using target keywords and locations</p>
+        </div>
+        <button id="btn-close-discovery-modal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <label for="discovery-source-select">Discovery Source / Provider:</label>
+          <select id="discovery-source-select" class="dropdown-select">
+            <option value="opencorporates">OpenCorporates Public Registry (Free / No Key Required)</option>
+            <option value="google_places">Google Places API (Requires API Key)</option>
+            <option value="ai_targeted">Gemini AI Grounded Directory Synthesis</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="discovery-keyword-input">Target Search Keyword / Industry:</label>
+          <input type="text" id="discovery-keyword-input" class="text-input" placeholder="e.g. Boutique Hotel, Chiropractic Clinic, Logistics, Cybersecurity">
+        </div>
+        <div class="input-group">
+          <label for="discovery-city-input">Target City / State / Country:</label>
+          <input type="text" id="discovery-city-input" class="text-input" value="Miami FL" placeholder="e.g. Austin TX, Miami FL, Chicago IL, London UK">
+        </div>
+        <div class="input-group">
+          <label for="discovery-vertical-select">Assign to ICP Target Audience:</label>
+          <select id="discovery-vertical-select" class="dropdown-select">
+            <!-- Populated from active client -->
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="discovery-count-select">Number of Entities to Fetch:</label>
+          <select id="discovery-count-select" class="dropdown-select">
+            <option value="5">5 Entities</option>
+            <option value="10" selected>10 Entities</option>
+            <option value="20">20 Entities</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-discovery-modal" class="btn btn-ghost">Cancel</button>
+        <button id="btn-execute-discovery" class="btn btn-primary-gradient">⚡ Run Discovery & Import</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Email Enrichment & Verification -->
+  <div class="modal-backdrop" id="enrichment-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>🔍 Contact Email Enrichment & Pattern Resolver</h3>
+          <p class="modal-sub">Turn domain names and decision-maker names into verified work mailboxes</p>
+        </div>
+        <button id="btn-close-enrichment-modal" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:#94a3b8; font-size:0.86rem; margin-bottom:16px;">
+          Choose how you want to enrich the contacts in your active client list:
+        </p>
+        <div class="enrich-option-card">
+          <label class="radio-label">
+            <input type="radio" name="enrich_method" value="pattern" checked>
+            <div>
+              <strong>Rule-Based Pattern Resolution (Free / Zero API Cost)</strong>
+              <p>Generates high-probability corporate email permutations ({first}.{last}@domain, {first}@domain, {f}{last}@domain) from the contact's name and website domain.</p>
+            </div>
+          </label>
+        </div>
+        <div class="enrich-option-card" style="margin-top:10px;">
+          <label class="radio-label">
+            <input type="radio" name="enrich_method" value="hunter">
+            <div>
+              <strong>Hunter.io Domain Search & Verification</strong>
+              <p>Calls Hunter.io's API to fetch real registered mailboxes and domain confidence patterns (requires Hunter.io API key in API Integrations).</p>
+            </div>
+          </label>
+        </div>
+        <div class="enrich-option-card" style="margin-top:10px;">
+          <label class="radio-label">
+            <input type="radio" name="enrich_method" value="ai_deduce">
+            <div>
+              <strong>Gemini AI Intelligence Permutation</strong>
+              <p>Uses Gemini to inspect the business domain, infer standard corporate naming conventions, and formulate the most likely executive mailbox.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-enrichment-modal" class="btn btn-ghost">Cancel</button>
+        <button id="btn-execute-enrichment" class="btn btn-ai-gradient">🔍 Run Enrichment on Active Leads</button>
       </div>
     </div>
   </div>
