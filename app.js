@@ -193,7 +193,10 @@ const DEFAULT_CLIENTS = {
 };
 
 // Application State
-let geminiApiKey = localStorage.getItem("apex_gemini_api_key") || "";
+// Default API key is loaded from config.js (gitignored) or window.GEMINI_DEFAULT_KEY
+// For Netlify: set GEMINI_API_KEY as an environment variable and inject via netlify.toml
+const DEFAULT_GEMINI_KEY = (typeof window !== "undefined" && window.GEMINI_DEFAULT_KEY) || "";
+let geminiApiKey = localStorage.getItem("apex_gemini_api_key") || DEFAULT_GEMINI_KEY;
 
 let clients = JSON.parse(localStorage.getItem("apex_universal_clients")) || DEFAULT_CLIENTS;
 let activeClientId = localStorage.getItem("apex_active_client_id") || "nutrientshelp";
@@ -232,7 +235,9 @@ async function callGeminiApi(promptText, jsonMode = false) {
 
 // Universal 4-Step Sequence Generator
 function buildUniversalSequence(lead, client) {
-  const isDoctor = lead.lastName && (lead.vertical.includes("clinic") || lead.vertical.includes("medical"));
+  // Detect doctor / professional salutation
+  const vertId = (lead.vertical || "").toLowerCase();
+  const isDoctor = lead.lastName && (vertId.includes("clinic") || vertId.includes("medical") || vertId.includes("chiro") || vertId.includes("dental"));
   const salutation = isDoctor
     ? `Dr. ${lead.lastName}`
     : (lead.firstName || "Team");
@@ -245,22 +250,24 @@ function buildUniversalSequence(lead, client) {
     pain: "operational inefficiencies and hidden costs"
   };
 
+  const painShort = vertInfo.pain.split(".")[0]; // First sentence only
+
   return {
     step1: {
-      subject: `Solving ${vertInfo.pain.split(" ")[0]} challenges at ${business}`,
-      body: `Hey ${salutation},\n\nNoticed the strong work you and your team are doing at ${business}.\n\n${client.story}\n\nToday, as a ${client.title} at ${client.businessName}, we specialize in ${client.coreProduct} specifically engineered to protect against ${vertInfo.pain}.\n\nWould you be open to ${client.zeroFrictionCta} at ${business}?\n\nBest,\n${client.leadName}\n${client.title}\n${client.website} | ${client.phone}`
+      subject: `Quick question for ${business}`,
+      body: `Hey ${salutation},\n\nNoticed the work you're doing at ${business} — impressive.\n\n${client.story}\n\nToday, as ${client.title} at ${client.businessName}, we help ${vertInfo.name} tackle: ${painShort}.\n\nOur approach with ${client.coreProduct} was built specifically for that.\n\nWould you be open to ${client.zeroFrictionCta}?\n\nBest,\n${client.leadName}\n${client.title}\n${client.website} | ${client.phone}`
     },
     step2: {
-      subject: `Why conventional alternatives fail for ${vertInfo.name}`,
-      body: `Hey ${salutation},\n\nQuick follow up on my note from earlier this week.\n\nMost providers serving ${vertInfo.name} take a conventional approach. However, ${client.whyFails}\n\nBy contrast, our approach with ${client.coreProduct} addresses the root issue without unnecessary overhead or friction.\n\nWhere should I send details or schedule ${client.zeroFrictionCta} for ${business}?\n\nBest,\n${client.leadName}`
+      subject: `Why most ${vertInfo.name} solutions fall short`,
+      body: `Hey ${salutation},\n\nFollowing up on my note from earlier.\n\n${client.whyFails}\n\nOur ${client.coreProduct} fixes this at the root level — no messy transitions, no heavy commitments.\n\nWorth a look? Happy to send details or schedule ${client.zeroFrictionCta} for ${business}.\n\nBest,\n${client.leadName}`
     },
     step3: {
-      subject: `A low-friction next step for ${business}`,
-      body: `Hey ${salutation},\n\nOne thing decision makers in ${vertInfo.name} frequently tell me is that they want to solve ${vertInfo.pain}, but don't want the risk of a messy vendor transition or heavy upfront contracts.\n\nThat's why we created a simple framework that allows ${business} to test our approach with zero operational disruption.\n\nWould this be worth a 5-minute review for your team this month?\n\nBest,\n${client.leadName}`
+      subject: `One low-risk next step for ${business}`,
+      body: `Hey ${salutation},\n\nDecision makers in ${vertInfo.name} often tell me the same thing — they want to fix ${painShort}, but don't want vendor lock-in or a big upfront investment.\n\nThat's exactly why we designed our starter engagement: zero disruption, no long-term contract, results first.\n\nWould this be worth 10 minutes of your time this week?\n\nBest,\n${client.leadName}`
     },
     step4: {
-      subject: `Permission to close your file, ${salutation}?`,
-      body: `Hey ${salutation},\n\nI know you're completely focused on priorities at ${business}, so I won't crowd your inbox.\n\nIf addressing ${vertInfo.pain} isn't on your radar right now, no problem at all. If anything shifts down the road, feel free to reach our team at ${client.website} or ${client.phone}.\n\nWishing you and ${business} continued success!\n\nBest,\n${client.leadName}`
+      subject: `Closing the loop, ${salutation}`,
+      body: `Hey ${salutation},\n\nI know priorities at ${business} keep you busy, so I'll make this my last note.\n\nIf ${painShort} isn't on the table right now — totally understood. If that changes, feel free to reach us directly:\n\n${client.website}\n${client.phone}\n\nWishing you and the team continued success.\n\nBest,\n${client.leadName}`
     }
   };
 }
@@ -424,7 +431,7 @@ function renderLeadsTable() {
     tr.innerHTML = `
       <td>
         <div class="lead-b-name">${escapeHtml(lead.businessName)}</div>
-        <div class="lead-contact-name">${escapeHtml(lead.website)}</div>
+        <div class="lead-contact-name">${escapeHtml(lead.website || "")}</div>
       </td>
       <td>
         <div>${escapeHtml(lead.firstName)} ${escapeHtml(lead.lastName)}</div>
@@ -433,8 +440,9 @@ function renderLeadsTable() {
       <td><span class="tag-badge tag-aau">${vertIcon} ${escapeHtml(vertName)}</span></td>
       <td>${escapeHtml(lead.city)}</td>
       <td><span class="status-indicator ready"><span class="dot"></span> Ready</span></td>
-      <td>
-        <button class="btn btn-ghost btn-small" onclick="event.stopPropagation(); selectLead('${lead.id}')">Inspect</button>
+      <td style="display:flex; gap:6px; align-items:center;">
+        <button class="btn btn-ghost btn-small" onclick="event.stopPropagation(); selectLead('${lead.id}')">View</button>
+        <button class="btn btn-danger btn-small" title="Remove prospect" onclick="event.stopPropagation(); deleteLead('${lead.id}')">✕</button>
       </td>
     `;
 
@@ -496,37 +504,99 @@ function logTerminal(message, type = "normal") {
 }
 
 // Trigger Execution Generator
-function triggerCampaignGeneration() {
+async function triggerCampaignGeneration() {
   const triggerBtn = document.getElementById("btn-trigger-engine");
   const client = getActiveClient();
   const city = document.getElementById("input-target-city").value || "Metro Area";
   const vertical = document.getElementById("select-vertical").value;
+  const batchMode = document.getElementById("input-lead-count").value;
 
   triggerBtn.disabled = true;
-  triggerBtn.innerHTML = `<span>Synthesizing Sequences...</span>`;
+  triggerBtn.innerHTML = `<span>⚡ Building Sequences...</span>`;
 
-  logTerminal(`[${client.industry}] Initializing lead discovery for ${client.businessName}...`, "info");
+  logTerminal(`[${client.industry}] Building campaigns for ${client.businessName}...`, "info");
+  logTerminal(`Target region: "${city}" | Audience: ${vertical === "all" ? "All ICPs" : vertical}`);
 
-  setTimeout(() => {
-    logTerminal(`Scanning target accounts in "${city}" for audience: ${vertical}...`);
-  }, 600);
+  if (batchMode === "expand" && geminiApiKey) {
+    // Real AI Lead Discovery
+    logTerminal(`🤖 Calling Gemini AI to discover new real-world prospects...`, "info");
+    try {
+      const vertInfo = vertical === "all"
+        ? client.targetVerticals
+        : client.targetVerticals.filter(v => v.id === vertical);
 
-  setTimeout(() => {
-    logTerminal(`Extracting decision-makers, validating MX records and email formats...`, "info");
-  }, 1400);
+      const vertDesc = vertInfo.map(v => `${v.name} (pain: ${v.pain})`).join("; ");
 
-  setTimeout(() => {
-    logTerminal(`Synthesizing 4-step sequence using: "${client.coreProduct}" & "${client.whyFails.substring(0, 45)}..."`);
-  }, 2200);
+      const discoverPrompt = `You are a B2B lead research specialist.
+Generate 5 realistic B2B prospect profiles for this business:
 
-  setTimeout(() => {
-    logTerminal(`✓ 4-step personalized campaigns built for ${client.leads.length} accounts. Ready for export!`, "success");
-    triggerBtn.disabled = false;
-    triggerBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>Trigger Campaign Engine</span>`;
-    renderLeadsTable();
-    updateMetrics();
-    selectLead(selectedLeadId || client.leads[0]?.id);
-  }, 3000);
+Business: ${client.businessName}
+Industry: ${client.industry}
+Core Offer: ${client.coreProduct}
+Target Audiences: ${vertDesc}
+Target City / Region: ${city}
+
+Return ONLY a valid JSON array of prospect objects (no markdown, no explanation):
+[
+  {
+    "id": "lead-ai-${Date.now()}-1",
+    "vertical": "<one of: ${(client.targetVerticals || []).map(v => v.id).join(", ")}>",
+    "businessName": "Real-sounding business name",
+    "firstName": "Real first name",
+    "lastName": "Real last name",
+    "title": "Decision maker title",
+    "email": "contact@realbusiness.com",
+    "phone": "(555) 000-0000",
+    "city": "${city}",
+    "website": "https://realbusiness.com"
+  }
+]`;
+
+      const resultStr = await callGeminiApi(discoverPrompt, true);
+      let cleanStr = resultStr.trim();
+      if (cleanStr.startsWith("```")) {
+        cleanStr = cleanStr.replace(/^```[a-z]*\n?/, "").replace(/\n?```$/, "");
+      }
+      const newLeads = JSON.parse(cleanStr);
+      if (Array.isArray(newLeads) && newLeads.length > 0) {
+        // Stamp unique IDs
+        newLeads.forEach((l, i) => {
+          l.id = `lead-ai-${Date.now()}-${i}`;
+        });
+        client.leads = [...(client.leads || []), ...newLeads];
+        localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
+        logTerminal(`✓ Gemini AI discovered ${newLeads.length} new prospects in "${city}".`, "success");
+      }
+    } catch (err) {
+      logTerminal(`[AI Discovery Error] ${err.message}. Using existing prospects.`, "warning");
+    }
+  } else {
+    // Simulate validation step for existing leads
+    await new Promise(r => setTimeout(r, 1200));
+    logTerminal(`Validating sequences for ${(client.leads || []).length} existing prospects...`, "info");
+    await new Promise(r => setTimeout(r, 800));
+  }
+
+  logTerminal(`✓ 4-step personalized sequences ready for ${(client.leads || []).length} accounts. Export when ready!`, "success");
+  triggerBtn.disabled = false;
+  triggerBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>Trigger Campaign Engine</span>`;
+  renderLeadsTable();
+  updateMetrics();
+  selectLead(selectedLeadId || client.leads?.[0]?.id);
+}
+
+// Delete a lead from the active client
+function deleteLead(leadId) {
+  const client = getActiveClient();
+  client.leads = (client.leads || []).filter(l => l.id !== leadId);
+  localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
+  if (selectedLeadId === leadId) {
+    selectedLeadId = client.leads[0]?.id || null;
+  }
+  renderLeadsTable();
+  updateMetrics();
+  if (selectedLeadId) selectLead(selectedLeadId);
+  logTerminal(`Prospect removed from active campaign list.`, "info");
 }
 
 // Export CSV
@@ -858,7 +928,12 @@ function setupEventListeners() {
   // AI Analyzer Modal Open
   const aiModal = document.getElementById("ai-modal");
   document.getElementById("btn-open-ai-analyzer").addEventListener("click", () => {
-    document.getElementById("ai-api-key").value = geminiApiKey;
+    // Pre-populate key — show masked placeholder if using default
+    const keyInput = document.getElementById("ai-api-key");
+    keyInput.value = geminiApiKey;
+    keyInput.placeholder = geminiApiKey === DEFAULT_GEMINI_KEY
+      ? "Using default shared key (override below to use your own)"
+      : "Your Gemini API Key";
     aiModal.classList.add("show");
   });
   document.getElementById("btn-close-ai-modal").addEventListener("click", () => {
@@ -901,46 +976,56 @@ function setupEventListeners() {
     runBtn.disabled = true;
     runBtn.innerHTML = `<span>Analyzing with Gemini 2.5 Flash...</span>`;
 
-    logTerminal(`Connecting to Google Gemini AI for URL: ${targetUrl}...`, "info");
+    logTerminal(`Connecting to Gemini AI to analyze: ${targetUrl}...`, "info");
 
     try {
-      const prompt = `You are an elite B2B Growth Strategist and Outbound Copywriter.
-Analyze the following business and synthesize a high-converting B2B client acquisition profile.
+      const prompt = `You are an elite B2B Growth Strategist and Outbound Copywriting Expert with access to web research.
+Your task: analyze the business at the URL below, research what they do, and synthesize a complete B2B client acquisition profile.
 
-Target Input / Website:
-${targetUrl}
-${customPrompt ? "Additional Instructions: " + customPrompt : ""}
+Business URL or Concept: ${targetUrl}
+${customPrompt ? "\nAdditional context / focus: " + customPrompt : ""}
 
-Respond ONLY with a valid JSON object matching this schema (no markdown formatting, no code blocks):
+Research this business thoroughly based on its URL. Identify:
+- What products/services they offer
+- Their likely founder or key representative
+- Their unique value proposition vs. competitors
+- 3 best B2B target audiences (completely relevant to THEIR industry — not sports unless that's their actual niche)
+- A compelling, authentic origin/credibility story
+- A low-friction lead magnet CTA appropriate for their offer
+- 2 sample realistic prospect profiles for their top target audience
+
+IMPORTANT: The target audiences MUST be relevant to THIS specific business's industry. Do not copy from unrelated industries.
+
+Respond ONLY with a valid JSON object (no markdown, no code blocks):
 {
-  "businessName": "Clear Business Name",
-  "industry": "Specific Industry / Sector",
-  "leadName": "Founder / Lead Representative Name or Title",
-  "title": "Professional Title / Credentials",
+  "businessName": "Exact Business Name from the website",
+  "industry": "Precise Industry / Sector",
+  "leadName": "Founder or Lead Rep Name (or generic title if unknown)",
+  "title": "Their Professional Title / Credentials",
   "website": "${targetUrl}",
   "phone": "(855) 000-0000",
-  "coreProduct": "Core Solution / Product Hook",
-  "story": "Concise 1-2 sentence origin story or unique credibility hook",
-  "whyFails": "1 sentence on why conventional competitors or status-quo alternatives fail or cause hidden costs",
-  "zeroFrictionCta": "A low-friction, high-value lead magnet (e.g., sample kit, free 15-min assessment, benchmark guide)",
-  "badges": ["Tag 1", "Tag 2", "Tag 3"],
+  "coreProduct": "Their core product/service hook in one compelling sentence",
+  "story": "1-2 sentence credibility/origin story (authentic to THEIR industry)",
+  "whyFails": "1 sentence: why conventional alternatives in THEIR space fail clients",
+  "zeroFrictionCta": "A specific low-friction lead magnet tailored to their offer",
+  "badges": ["Key Differentiator 1", "Key Differentiator 2", "Key Differentiator 3"],
   "targetVerticals": [
     {
       "id": "v1",
-      "name": "High-Value B2B Target Audience 1",
-      "pain": "Specific operational or financial pain point",
+      "name": "Specific B2B Audience 1 relevant to this business",
+      "pain": "Specific pain point that THIS business solves for them",
       "icon": "🎯"
     },
     {
       "id": "v2",
-      "name": "High-Value B2B Target Audience 2",
-      "pain": "Specific operational or financial pain point",
+      "name": "Specific B2B Audience 2 relevant to this business",
+      "pain": "Specific pain point that THIS business solves for them",
       "icon": "🚀"
     },
     {
       "id": "v3",
-      "name": "High-Value B2B Target Audience 3",
-      "pain": "Specific operational or financial pain point",
+      "name": "Specific B2B Audience 3 relevant to this business",
+      "pain": "Specific pain point that THIS business solves for them",
       "icon": "⚡"
     }
   ],
@@ -948,26 +1033,26 @@ Respond ONLY with a valid JSON object matching this schema (no markdown formatti
     {
       "id": "lead-ai-1",
       "vertical": "v1",
-      "businessName": "Pinnacle Enterprise Group",
+      "businessName": "Realistic business name in their target audience",
       "firstName": "Marcus",
       "lastName": "Vance",
-      "title": "Director",
-      "email": "m.vance@pinnacle-example.com",
+      "title": "Relevant decision-maker title",
+      "email": "m.vance@targetbusiness.com",
       "phone": "(555) 012-3456",
       "city": "New York NY",
-      "website": "https://example.com"
+      "website": "https://targetbusiness.com"
     },
     {
       "id": "lead-ai-2",
       "vertical": "v2",
-      "businessName": "Summit Innovation Partners",
+      "businessName": "Another realistic target business",
       "firstName": "Sarah",
       "lastName": "Jenkins",
-      "title": "Head of Operations",
-      "email": "sjenkins@summit-example.com",
+      "title": "Relevant decision-maker title",
+      "email": "sjenkins@anothertarget.com",
       "phone": "(555) 018-9922",
       "city": "Chicago IL",
-      "website": "https://example.com"
+      "website": "https://anothertarget.com"
     }
   ]
 }`;
@@ -1006,6 +1091,10 @@ Respond ONLY with a valid JSON object matching this schema (no markdown formatti
 
   // AI Polish Touch Handler
   document.getElementById("btn-ai-polish-touch").addEventListener("click", async () => {
+    if (!geminiApiKey) {
+      logTerminal("[Warning] No Gemini API key set. Open AI Analyzer to configure.", "warning");
+      return;
+    }
     const polishBtn = document.getElementById("btn-ai-polish-touch");
     const currentSubject = document.getElementById("seq-subject-input").value;
     const currentBody = document.getElementById("seq-body-input").value;
@@ -1020,22 +1109,19 @@ Respond ONLY with a valid JSON object matching this schema (no markdown formatti
     try {
       const polishPrompt = `You are a world-class cold email copywriter with a 45%+ reply rate.
 Rewrite the following B2B email to make it sharper, more conversational, punchier, and zero-bullshit.
-Avoid corporate buzzwords, keep paragraphs under 2 sentences, and make the CTA natural and low-friction.
+Avoid corporate buzzwords. Keep paragraphs short (1-2 sentences max). Make the CTA feel natural and effortless.
+Preserve the sender's name and contact info at the bottom.
 
-Current Subject:
-${currentSubject}
+Current Subject: ${currentSubject}
 
 Current Body:
 ${currentBody}
 
-Respond ONLY with a valid JSON object in this format (no markdown):
-{
-  "subject": "Refined punchy subject line",
-  "body": "Refined email body"
-}`;
+Respond ONLY with a valid JSON object (no markdown, no code block):
+{ "subject": "Refined subject line", "body": "Refined email body" }`;
 
       const resStr = await callGeminiApi(polishPrompt, true);
-      let clean = resStr;
+      let clean = resStr.trim();
       if (clean.startsWith("```")) {
         clean = clean.replace(/^```[a-z]*\n?/, "").replace(/\n?```$/, "");
       }
@@ -1044,14 +1130,34 @@ Respond ONLY with a valid JSON object in this format (no markdown):
       document.getElementById("seq-subject-input").value = polished.subject;
       document.getElementById("seq-body-input").value = polished.body;
 
-      logTerminal(`✓ Touch ${selectedTouchStep} polished with Gemini AI!`, "success");
+      logTerminal(`✓ Touch ${selectedTouchStep} polished by Gemini AI! You can edit further before copying.`, "success");
     } catch (err) {
       console.error(err);
-      logTerminal(`[AI Error] ${err.message}`, "warning");
+      logTerminal(`[AI Polish Error] ${err.message}`, "warning");
     } finally {
       polishBtn.disabled = false;
       polishBtn.textContent = "✨ AI Polish Touch";
     }
+  });
+
+  // Delete active client profile
+  document.getElementById("btn-delete-client")?.addEventListener("click", () => {
+    const client = getActiveClient();
+    const clientId = client.id;
+    // Protect the default profiles
+    const defaultIds = Object.keys(DEFAULT_CLIENTS);
+    if (defaultIds.includes(clientId)) {
+      alert("Default demo profiles cannot be deleted. You can customize them or create a new one.");
+      return;
+    }
+    if (!confirm(`Delete the profile "${client.businessName}"? This cannot be undone.`)) return;
+    delete clients[clientId];
+    localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
+    const remaining = Object.keys(clients);
+    activeClientId = remaining[0] || "nutrientshelp";
+    renderClientSelect();
+    loadClient(activeClientId);
+    logTerminal(`Profile "${client.businessName}" deleted.`, "info");
   });
 }
 

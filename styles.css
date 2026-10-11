@@ -278,6 +278,18 @@ body {
   font-size: 0.8rem;
 }
 
+.btn-danger {
+  background: rgba(244, 63, 94, 0.12);
+  color: #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+.btn-danger:hover {
+  background: rgba(244, 63, 94, 0.25);
+  border-color: rgba(244, 63, 94, 0.5);
+  transform: translateY(-1px);
+}
+
 .btn-icon {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--bg-card-border);
