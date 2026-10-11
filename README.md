@@ -20,6 +20,9 @@ This project does the opposite. It takes an authentic brand origin story, scient
 
 ---
 
+> 📖 **Looking for a beginner-friendly guide?** Read our comprehensive [Simple 7th-Grade Level User Guide](file:///c:/Users/atifj/OneDrive/Desktop/Lead%20automations/USER_GUIDE.md) for plain-English steps on finding leads, choosing categories, and exporting emails.
+
+---
 ## ðŸŒŸ Key Architecture & Capabilities
 
 ### 1. Multi-Tenant Web Dashboard (`index.html`, `styles.css`, `app.js`)
