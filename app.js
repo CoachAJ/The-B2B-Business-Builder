@@ -1,4 +1,4 @@
-/**
+﻿/**
  * The B2B Business Builder - Universal Industry-Agnostic Engine
  * Supports any industry, client profile, target audience (ICP), and custom outreach sequence.
  */
@@ -8,70 +8,37 @@ const DEFAULT_CLIENTS = {
   "nutrientshelp": {
     id: "nutrientshelp",
     businessName: "NutrientsHelp",
-    industry: "Wellness & Sports Nutrition",
+    industry: "Wellness & Holistic Nutrition",
     leadName: "Coach AJ",
     website: "nutrientshelp.com",
     phone: "(855) 835-2777",
     title: "Certified Wholistic Health Coach & Independent Youngevity Distributor #102742703",
-    story: "Growing up playing competitive ball in Harlem—sometimes three tournament games in a single evening—I know firsthand what 4th-quarter fatigue and brutal muscle cramps do to performance. Back then, coaches only had sugary sports drinks that spiked insulin and crashed energy.",
+    story: "Growing up playing competitive ball in Harlem, sometimes three tournament games in a single evening, I know firsthand what 4th-quarter fatigue and brutal muscle cramps do to performance. Back then, coaches only had sugary sports drinks that spiked insulin and crashed energy.",
     coreProduct: "Rebound FX clean cellular hydration & 90 Essential Nutrients foundation",
-    whyFails: "Standard sports drinks only replace salt and water while loading athletes with high-fructose corn syrup, completely neglecting cellular trace minerals.",
-    zeroFrictionCta: "a complimentary sample pack for a couple of your coaches to test during your next scrimmage",
+    whyFails: "Standard sports drinks only replace salt and water while loading athletes with high-fructose corn syrup, completely neglecting the 60+ cellular trace minerals needed for peak performance.",
+    zeroFrictionCta: "a complimentary sample pack for a couple of your coaches to test during your next practice",
     badges: ["Rebound FX", "90 Essential Nutrients", "Pharmacist Ben Fuchs"],
     targetVerticals: [
-      { id: "aau_basketball", name: "Youth Basketball & AAU Programs", pain: "4th quarter fatigue and late-game muscle cramps", icon: "🏀" },
-      { id: "holistic_clinics", name: "Holistic & Chiropractic Clinics", pain: "structural adjustments and therapies not holding due to mineral deficiencies", icon: "🩺" },
-      { id: "gyms_trainers", name: "Boutique Gyms & Athletic Trainers", pain: "monetizing member supplement questions with zero retail inventory overhead", icon: "🏋️" }
+      { id: "aau_basketball", name: "Youth Basketball & AAU Programs", pain: "4th quarter fatigue and late-game muscle cramps tanking player performance", icon: "🏀" },
+      { id: "holistic_clinics", name: "Holistic & Chiropractic Clinics", pain: "structural adjustments not holding long-term due to unresolved mineral deficiencies", icon: "🩺" },
+      { id: "gyms_trainers", name: "Boutique Gyms & Athletic Trainers", pain: "clients demanding supplement guidance with zero retail inventory or overhead", icon: "🏋️" }
     ],
     leads: [
-      {
-        id: "nh-1",
-        vertical: "aau_basketball",
-        businessName: "Riverside Hawks Basketball",
-        firstName: "Christopher",
-        lastName: "Edison",
-        title: "Program Director",
-        email: "info@riversidehawks.net",
-        phone: "(212) 870-6811",
-        city: "New York NY",
-        website: "https://riversidehawks.net"
-      },
-      {
-        id: "nh-2",
-        vertical: "aau_basketball",
-        businessName: "Gauchos Gym & AAU Program",
-        firstName: "Corey",
-        lastName: "Edwards",
-        title: "Head Basketball Coach",
-        email: "cedwards@gauchosbasketball.com",
-        phone: "(718) 293-2101",
-        city: "Bronx NY",
-        website: "https://nygauchos.com"
-      },
-      {
-        id: "nh-3",
-        vertical: "holistic_clinics",
-        businessName: "Harlem Chiropractic & Wellness",
-        firstName: "Marcus",
-        lastName: "Vance",
-        title: "Lead Chiropractor",
-        email: "dr.vance@harlemchiro.com",
-        phone: "(212) 555-0192",
-        city: "New York NY",
-        website: "https://harlemchiropractic.com"
-      },
-      {
-        id: "nh-4",
-        vertical: "gyms_trainers",
-        businessName: "Harlem Athletic Performance",
-        firstName: "Jason",
-        lastName: "Miller",
-        title: "Head Trainer & Owner",
-        email: "jason@harlemperformance.com",
-        phone: "(646) 555-0188",
-        city: "New York NY",
-        website: "https://harlemperformance.com"
-      }
+      { id: "nh-1", vertical: "aau_basketball", businessName: "Riverside Hawks Basketball", firstName: "Christopher", lastName: "Edison", title: "Program Director", email: "info@riversidehawks.net", phone: "(212) 870-6811", city: "New York NY", website: "https://riversidehawks.net" },
+      { id: "nh-2", vertical: "aau_basketball", businessName: "Gauchos Gym & AAU Program", firstName: "Corey", lastName: "Edwards", title: "Head Basketball Coach", email: "cedwards@gauchosbasketball.com", phone: "(718) 293-2101", city: "Bronx NY", website: "https://nygauchos.com" },
+      { id: "nh-3", vertical: "aau_basketball", businessName: "Empire State Elite Basketball", firstName: "Marcus", lastName: "Johnson", title: "AAU Director & Founder", email: "marcus@empireelitebasketball.com", phone: "(917) 555-0143", city: "Queens NY", website: "https://empireelitebasketball.com" },
+      { id: "nh-4", vertical: "aau_basketball", businessName: "Dream Chasers Academy", firstName: "Denzel", lastName: "Williams", title: "Founder & Head Coach", email: "coach@dreamchasersacademy.com", phone: "(973) 555-0177", city: "Newark NJ", website: "https://dreamchasersacademy.com" },
+      { id: "nh-5", vertical: "aau_basketball", businessName: "Jersey Shore Hoops Academy", firstName: "Tanya", lastName: "Richardson", title: "Athletic Director", email: "trichardson@jerseyshorehoops.com", phone: "(609) 555-0133", city: "Atlantic City NJ", website: "https://jerseyshorehoops.com" },
+      { id: "nh-6", vertical: "holistic_clinics", businessName: "Harlem Chiropractic & Wellness", firstName: "Marcus", lastName: "Vance", title: "Lead Chiropractor", email: "dr.vance@harlemchiro.com", phone: "(212) 555-0192", city: "New York NY", website: "https://harlemchiropractic.com" },
+      { id: "nh-7", vertical: "holistic_clinics", businessName: "Brooklyn Integrative Health", firstName: "Sarah", lastName: "Chen", title: "Clinic Director", email: "dr.chen@brooklynintegrativehealth.com", phone: "(718) 555-0214", city: "Brooklyn NY", website: "https://brooklynintegrativehealth.com" },
+      { id: "nh-8", vertical: "holistic_clinics", businessName: "Queens Natural Health Center", firstName: "Raymond", lastName: "Okonkwo", title: "Medical Director", email: "r.okonkwo@queensnaturalhealth.com", phone: "(347) 555-0189", city: "Flushing NY", website: "https://queensnaturalhealth.com" },
+      { id: "nh-9", vertical: "holistic_clinics", businessName: "Hudson Valley Wellness Group", firstName: "Patricia", lastName: "Moore", title: "Head Practitioner & Owner", email: "pmoore@hudsonvalleywellness.com", phone: "(845) 555-0162", city: "Poughkeepsie NY", website: "https://hudsonvalleywellness.com" },
+      { id: "nh-10", vertical: "holistic_clinics", businessName: "Livingwell Functional Medicine", firstName: "Andre", lastName: "Baptiste", title: "Founder & Functional MD", email: "dr.baptiste@livingwellmed.com", phone: "(201) 555-0144", city: "Jersey City NJ", website: "https://livingwellmed.com" },
+      { id: "nh-11", vertical: "gyms_trainers", businessName: "Harlem Athletic Performance", firstName: "Jason", lastName: "Miller", title: "Head Trainer & Owner", email: "jason@harlemperformance.com", phone: "(646) 555-0188", city: "New York NY", website: "https://harlemperformance.com" },
+      { id: "nh-12", vertical: "gyms_trainers", businessName: "BronxFit Performance Studio", firstName: "Derek", lastName: "Washington", title: "Owner & Head Coach", email: "derek@bronxfitperformance.com", phone: "(718) 555-0231", city: "Bronx NY", website: "https://bronxfitperformance.com" },
+      { id: "nh-13", vertical: "gyms_trainers", businessName: "Peak Performance Athletic Club", firstName: "Kimberly", lastName: "Torres", title: "General Manager", email: "kim@peakperformanceac.com", phone: "(973) 555-0156", city: "Newark NJ", website: "https://peakperformanceac.com" },
+      { id: "nh-14", vertical: "gyms_trainers", businessName: "Iron Temple CrossFit", firstName: "Rafael", lastName: "Santos", title: "Head Coach & Owner", email: "rafael@irontemplefit.com", phone: "(201) 555-0197", city: "Hoboken NJ", website: "https://irontemplefit.com" },
+      { id: "nh-15", vertical: "gyms_trainers", businessName: "Apex Sports Performance", firstName: "Lamar", lastName: "Davis", title: "Director of Training", email: "ldavis@apexsportsperformance.com", phone: "(914) 555-0121", city: "White Plains NY", website: "https://apexsportsperformance.com" }
     ]
   },
 
@@ -90,46 +57,22 @@ const DEFAULT_CLIENTS = {
     badges: ["Zero-Trust Security", "Immutable Backups", "Ransomware Defense"],
     targetVerticals: [
       { id: "legal_firms", name: "Boutique Law Firms & Legal Partners", pain: "client escrow wire fraud and attorney-client privilege data breaches", icon: "⚖️" },
-      { id: "wealth_mgmt", name: "Wealth Management & CPA Firms", pain: "GLBA regulatory compliance audits and ransomware extortion", icon: "💼" },
-      { id: "medical_practices", name: "Regional Medical & Dental Practices", pain: "HIPAA breach liability and electronic health record downtime", icon: "🏥" }
+      { id: "wealth_mgmt", name: "Wealth Management & CPA Firms", pain: "GLBA regulatory compliance audits and ransomware extortion targeting client portfolio data", icon: "💼" },
+      { id: "medical_practices", name: "Regional Medical & Dental Practices", pain: "HIPAA breach liability, EHR downtime, and ransomware shutting down patient care", icon: "🏥" }
     ],
     leads: [
-      {
-        id: "nc-1",
-        vertical: "legal_firms",
-        businessName: "Sterling & Vance Legal Partners",
-        firstName: "Robert",
-        lastName: "Sterling",
-        title: "Managing Partner",
-        email: "rsterling@sterlinglegal.com",
-        phone: "(312) 555-0118",
-        city: "Chicago IL",
-        website: "https://sterlinglegal.com"
-      },
-      {
-        id: "nc-2",
-        vertical: "wealth_mgmt",
-        businessName: "Beacon Wealth Management",
-        firstName: "Victoria",
-        lastName: "Hayward",
-        title: "Managing Director",
-        email: "v.hayward@beaconwealth.com",
-        phone: "(617) 555-0174",
-        city: "Boston MA",
-        website: "https://beaconwealth.com"
-      },
-      {
-        id: "nc-3",
-        vertical: "medical_practices",
-        businessName: "Midwest Specialty Dental Care",
-        firstName: "Arthur",
-        lastName: "Penta",
-        title: "Practice Administrator",
-        email: "admin@midwestdentalcare.com",
-        phone: "(312) 555-0199",
-        city: "Chicago IL",
-        website: "https://midwestdentalcare.com"
-      }
+      { id: "nc-1", vertical: "legal_firms", businessName: "Sterling & Vance Legal Partners", firstName: "Robert", lastName: "Sterling", title: "Managing Partner", email: "rsterling@sterlinglegal.com", phone: "(312) 555-0118", city: "Chicago IL", website: "https://sterlinglegal.com" },
+      { id: "nc-2", vertical: "legal_firms", businessName: "Thornton & Associates Law Group", firstName: "Catherine", lastName: "Thornton", title: "Senior Partner", email: "cthornton@thorntonlaw.com", phone: "(312) 555-0147", city: "Chicago IL", website: "https://thorntonlaw.com" },
+      { id: "nc-3", vertical: "legal_firms", businessName: "Pacific Northwest Legal Group", firstName: "Daniel", lastName: "Park", title: "Managing Partner", email: "dpark@pnwlegal.com", phone: "(206) 555-0183", city: "Seattle WA", website: "https://pnwlegal.com" },
+      { id: "nc-4", vertical: "legal_firms", businessName: "Davis & Whitfield Attorneys", firstName: "Amanda", lastName: "Davis", title: "Partner", email: "adavis@daviswhitfield.com", phone: "(214) 555-0166", city: "Dallas TX", website: "https://daviswhitfield.com" },
+      { id: "nc-5", vertical: "wealth_mgmt", businessName: "Beacon Wealth Management", firstName: "Victoria", lastName: "Hayward", title: "Managing Director", email: "v.hayward@beaconwealth.com", phone: "(617) 555-0174", city: "Boston MA", website: "https://beaconwealth.com" },
+      { id: "nc-6", vertical: "wealth_mgmt", businessName: "Summit Capital Advisors", firstName: "Richard", lastName: "Elston", title: "Chief Investment Officer", email: "relston@summitcapital.com", phone: "(212) 555-0139", city: "New York NY", website: "https://summitcapital.com" },
+      { id: "nc-7", vertical: "wealth_mgmt", businessName: "Meridian Financial Planning", firstName: "Grace", lastName: "Liu", title: "Senior Financial Advisor", email: "gliu@meridianfp.com", phone: "(415) 555-0188", city: "San Francisco CA", website: "https://meridianfp.com" },
+      { id: "nc-8", vertical: "wealth_mgmt", businessName: "Harbor Point Wealth Partners", firstName: "Thomas", lastName: "Blackwell", title: "President & Founder", email: "tblackwell@harborpointwealth.com", phone: "(704) 555-0122", city: "Charlotte NC", website: "https://harborpointwealth.com" },
+      { id: "nc-9", vertical: "medical_practices", businessName: "Midwest Specialty Dental Care", firstName: "Arthur", lastName: "Penta", title: "Practice Administrator", email: "admin@midwestdentalcare.com", phone: "(312) 555-0199", city: "Chicago IL", website: "https://midwestdentalcare.com" },
+      { id: "nc-10", vertical: "medical_practices", businessName: "Lakewood Family Medicine", firstName: "Janet", lastName: "Collins", title: "Practice Owner & MD", email: "dr.collins@lakewoodfm.com", phone: "(216) 555-0154", city: "Cleveland OH", website: "https://lakewoodfm.com" },
+      { id: "nc-11", vertical: "medical_practices", businessName: "Sunshine Pediatric Group", firstName: "Marcus", lastName: "Webb", title: "Medical Director", email: "mwebb@sunshinepediatrics.com", phone: "(813) 555-0177", city: "Tampa FL", website: "https://sunshinepediatrics.com" },
+      { id: "nc-12", vertical: "medical_practices", businessName: "Northwest ENT Specialists", firstName: "Karen", lastName: "Nakamura", title: "Practice Manager", email: "knakamura@nwentspecialists.com", phone: "(503) 555-0162", city: "Portland OR", website: "https://nwentspecialists.com" }
     ]
   },
 
@@ -143,51 +86,27 @@ const DEFAULT_CLIENTS = {
     title: "Director of Green Facility Solutions",
     story: "Managing facilities across corporate buildings, I discovered that traditional commercial cleaning chemicals cause frequent tenant respiratory complaints and jeopardize corporate LEED green certifications.",
     coreProduct: "Certified Hospital-Grade Non-Toxic Eco-Sanitation & Indoor Air Quality Management",
-    whyFails: "Conventional janitorial vendors use harsh volatile organic compounds that leave toxic residues and trigger employee complaints without deep pathogen sanitation.",
+    whyFails: "Conventional janitorial vendors use harsh volatile organic compounds that leave toxic residues and trigger employee health complaints without delivering true pathogen sanitation.",
     zeroFrictionCta: "a complimentary 1-floor trial clean and indoor air quality particle audit",
     badges: ["LEED Certified Clean", "Non-Toxic Sanitation", "Air Quality Care"],
     targetVerticals: [
-      { id: "boutique_hotels", name: "Boutique Luxury Hotels & Resorts", pain: "harsh chemical odors and guest cleanliness review complaints", icon: "🏨" },
-      { id: "tech_offices", name: "Tech Office Parks & Coworking Hubs", pain: "employee health complaints and sustainable ESG building benchmarks", icon: "🏢" },
-      { id: "private_schools", name: "Private Schools & Childcare Centers", pain: "child-safe non-toxic sanitation and seasonal illness outbreaks", icon: "🏫" }
+      { id: "boutique_hotels", name: "Boutique Luxury Hotels & Resorts", pain: "harsh chemical odors damaging guest reviews and cleanliness scores on TripAdvisor", icon: "🏨" },
+      { id: "tech_offices", name: "Tech Office Parks & Coworking Hubs", pain: "employee sick days, health complaints, and ESG green building certification requirements", icon: "🏢" },
+      { id: "private_schools", name: "Private Schools & Childcare Centers", pain: "child-safe non-toxic sanitation and preventing costly seasonal illness outbreaks", icon: "🏫" }
     ],
     leads: [
-      {
-        id: "ps-1",
-        vertical: "boutique_hotels",
-        businessName: "The Mercer Grand Boutique Hotel",
-        firstName: "Alexander",
-        lastName: "Wright",
-        title: "General Manager",
-        email: "awright@mercergrand.com",
-        phone: "(212) 555-0133",
-        city: "New York NY",
-        website: "https://mercergrand.com"
-      },
-      {
-        id: "ps-2",
-        vertical: "tech_offices",
-        businessName: "Innovate Coworking Hub",
-        firstName: "Jessica",
-        lastName: "Kao",
-        title: "Head of Operations",
-        email: "jkaoa@innovatehub.io",
-        phone: "(512) 555-0162",
-        city: "Austin TX",
-        website: "https://innovatehub.io"
-      },
-      {
-        id: "ps-3",
-        vertical: "private_schools",
-        businessName: "Oakridge Preparatory Academy",
-        firstName: "Elizabeth",
-        lastName: "Warren",
-        title: "Head of School",
-        email: "headmaster@oakridgeprep.org",
-        phone: "(404) 555-0195",
-        city: "Atlanta GA",
-        website: "https://oakridgeprep.org"
-      }
+      { id: "ps-1", vertical: "boutique_hotels", businessName: "The Mercer Grand Boutique Hotel", firstName: "Alexander", lastName: "Wright", title: "General Manager", email: "awright@mercergrand.com", phone: "(212) 555-0133", city: "New York NY", website: "https://mercergrand.com" },
+      { id: "ps-2", vertical: "boutique_hotels", businessName: "Aspen Summit Lodge & Spa", firstName: "Christine", lastName: "Vale", title: "Director of Operations", email: "cvale@aspensummitlodge.com", phone: "(970) 555-0148", city: "Aspen CO", website: "https://aspensummitlodge.com" },
+      { id: "ps-3", vertical: "boutique_hotels", businessName: "The Charleston Harbor Inn", firstName: "William", lastName: "Forsythe", title: "General Manager", email: "wforsythe@charlestonharborinn.com", phone: "(843) 555-0177", city: "Charleston SC", website: "https://charlestonharborinn.com" },
+      { id: "ps-4", vertical: "boutique_hotels", businessName: "Pacific Palms Boutique Resort", firstName: "Michelle", lastName: "Tanaka", title: "Director of Operations", email: "mtanaka@pacificpalmsresort.com", phone: "(619) 555-0191", city: "San Diego CA", website: "https://pacificpalmsresort.com" },
+      { id: "ps-5", vertical: "tech_offices", businessName: "Innovate Coworking Hub", firstName: "Jessica", lastName: "Kao", title: "Head of Operations", email: "jkao@innovatehub.io", phone: "(512) 555-0162", city: "Austin TX", website: "https://innovatehub.io" },
+      { id: "ps-6", vertical: "tech_offices", businessName: "Catalyst Tech Campus", firstName: "Brian", lastName: "Osman", title: "Facilities Director", email: "bosman@catalysttechcampus.com", phone: "(415) 555-0144", city: "San Francisco CA", website: "https://catalysttechcampus.com" },
+      { id: "ps-7", vertical: "tech_offices", businessName: "TechNest Coworking Denver", firstName: "Priya", lastName: "Sharma", title: "General Manager", email: "psharma@technestdenver.com", phone: "(720) 555-0167", city: "Denver CO", website: "https://technestdenver.com" },
+      { id: "ps-8", vertical: "tech_offices", businessName: "HarbourView Innovation Hub", firstName: "Derek", lastName: "Stone", title: "Operations Manager", email: "dstone@harbourviewhub.com", phone: "(206) 555-0188", city: "Seattle WA", website: "https://harbourviewhub.com" },
+      { id: "ps-9", vertical: "private_schools", businessName: "Oakridge Preparatory Academy", firstName: "Elizabeth", lastName: "Warren", title: "Head of School", email: "headmaster@oakridgeprep.org", phone: "(404) 555-0195", city: "Atlanta GA", website: "https://oakridgeprep.org" },
+      { id: "ps-10", vertical: "private_schools", businessName: "Highpoint Montessori School", firstName: "Susan", lastName: "Rafferty", title: "Executive Director", email: "srafferty@highpointmontessori.org", phone: "(617) 555-0153", city: "Boston MA", website: "https://highpointmontessori.org" },
+      { id: "ps-11", vertical: "private_schools", businessName: "Willow Creek Day School", firstName: "Natalie", lastName: "Brown", title: "Principal", email: "nbrown@willowcreekschool.com", phone: "(602) 555-0174", city: "Phoenix AZ", website: "https://willowcreekschool.com" },
+      { id: "ps-12", vertical: "private_schools", businessName: "Lakeside Learning Center", firstName: "James", lastName: "Caldwell", title: "Director", email: "jcaldwell@lakesidelearning.org", phone: "(612) 555-0139", city: "Minneapolis MN", website: "https://lakesidelearning.org" }
     ]
   }
 };
@@ -255,19 +174,19 @@ function buildUniversalSequence(lead, client) {
   return {
     step1: {
       subject: `Quick question for ${business}`,
-      body: `Hey ${salutation},\n\nNoticed the work you're doing at ${business} — impressive.\n\n${client.story}\n\nToday, as ${client.title} at ${client.businessName}, we help ${vertInfo.name} tackle: ${painShort}.\n\nOur approach with ${client.coreProduct} was built specifically for that.\n\nWould you be open to ${client.zeroFrictionCta}?\n\nBest,\n${client.leadName}\n${client.title}\n${client.website} | ${client.phone}`
+      body: `Hey ${salutation},\n\nNoticed the work you're doing at ${business} â€” impressive.\n\n${client.story}\n\nToday, as ${client.title} at ${client.businessName}, we help ${vertInfo.name} tackle: ${painShort}.\n\nOur approach with ${client.coreProduct} was built specifically for that.\n\nWould you be open to ${client.zeroFrictionCta}?\n\nBest,\n${client.leadName}\n${client.title}\n${client.website} | ${client.phone}`
     },
     step2: {
       subject: `Why most ${vertInfo.name} solutions fall short`,
-      body: `Hey ${salutation},\n\nFollowing up on my note from earlier.\n\n${client.whyFails}\n\nOur ${client.coreProduct} fixes this at the root level — no messy transitions, no heavy commitments.\n\nWorth a look? Happy to send details or schedule ${client.zeroFrictionCta} for ${business}.\n\nBest,\n${client.leadName}`
+      body: `Hey ${salutation},\n\nFollowing up on my note from earlier.\n\n${client.whyFails}\n\nOur ${client.coreProduct} fixes this at the root level â€” no messy transitions, no heavy commitments.\n\nWorth a look? Happy to send details or schedule ${client.zeroFrictionCta} for ${business}.\n\nBest,\n${client.leadName}`
     },
     step3: {
       subject: `One low-risk next step for ${business}`,
-      body: `Hey ${salutation},\n\nDecision makers in ${vertInfo.name} often tell me the same thing — they want to fix ${painShort}, but don't want vendor lock-in or a big upfront investment.\n\nThat's exactly why we designed our starter engagement: zero disruption, no long-term contract, results first.\n\nWould this be worth 10 minutes of your time this week?\n\nBest,\n${client.leadName}`
+      body: `Hey ${salutation},\n\nDecision makers in ${vertInfo.name} often tell me the same thing â€” they want to fix ${painShort}, but don't want vendor lock-in or a big upfront investment.\n\nThat's exactly why we designed our starter engagement: zero disruption, no long-term contract, results first.\n\nWould this be worth 10 minutes of your time this week?\n\nBest,\n${client.leadName}`
     },
     step4: {
       subject: `Closing the loop, ${salutation}`,
-      body: `Hey ${salutation},\n\nI know priorities at ${business} keep you busy, so I'll make this my last note.\n\nIf ${painShort} isn't on the table right now — totally understood. If that changes, feel free to reach us directly:\n\n${client.website}\n${client.phone}\n\nWishing you and the team continued success.\n\nBest,\n${client.leadName}`
+      body: `Hey ${salutation},\n\nI know priorities at ${business} keep you busy, so I'll make this my last note.\n\nIf ${painShort} isn't on the table right now â€” totally understood. If that changes, feel free to reach us directly:\n\n${client.website}\n${client.phone}\n\nWishing you and the team continued success.\n\nBest,\n${client.leadName}`
     }
   };
 }
@@ -302,7 +221,7 @@ function loadClient(clientId) {
 
   // Update Banner
   document.getElementById("banner-client-name").textContent = `${client.businessName} (${client.leadName})`;
-  document.getElementById("banner-client-desc").textContent = `${client.title} • ${client.website}`;
+  document.getElementById("banner-client-desc").textContent = `${client.title} â€¢ ${client.website}`;
   document.getElementById("banner-industry").textContent = client.industry || "B2B";
 
   const badgesWrap = document.getElementById("banner-badges");
@@ -331,11 +250,11 @@ function loadClient(clientId) {
 
 function renderVerticalDropdowns(client) {
   const selectVertical = document.getElementById("select-vertical");
-  selectVertical.innerHTML = `<option value="all">⚡ All Target Audiences (Combined)</option>`;
+  selectVertical.innerHTML = `<option value="all">âš¡ All Target Audiences (Combined)</option>`;
   (client.targetVerticals || []).forEach(v => {
     const opt = document.createElement("option");
     opt.value = v.id;
-    opt.textContent = `${v.icon || "🎯"} ${v.name}`;
+    opt.textContent = `${v.icon || "ðŸŽ¯"} ${v.name}`;
     selectVertical.appendChild(opt);
   });
 
@@ -344,7 +263,7 @@ function renderVerticalDropdowns(client) {
   (client.targetVerticals || []).forEach(v => {
     const opt = document.createElement("option");
     opt.value = v.id;
-    opt.textContent = `${v.icon || "🎯"} ${v.name}`;
+    opt.textContent = `${v.icon || "ðŸŽ¯"} ${v.name}`;
     modalVertical.appendChild(opt);
   });
 }
@@ -364,7 +283,7 @@ function renderDynamicFilterPills(client) {
     const pill = document.createElement("button");
     pill.className = "pill";
     pill.dataset.filter = v.id;
-    pill.innerHTML = `${v.icon || "🎯"} ${v.name} (<span id="count-${v.id}">0</span>)`;
+    pill.innerHTML = `${v.icon || "ðŸŽ¯"} ${v.name} (<span id="count-${v.id}">0</span>)`;
     pill.addEventListener("click", () => handleFilterClick(pill, v.id));
     container.appendChild(pill);
   });
@@ -426,7 +345,7 @@ function renderLeadsTable() {
 
     const vertObj = (client.targetVerticals || []).find(v => v.id === lead.vertical);
     const vertName = vertObj ? vertObj.name : lead.vertical;
-    const vertIcon = vertObj ? vertObj.icon : "🎯";
+    const vertIcon = vertObj ? vertObj.icon : "ðŸŽ¯";
 
     tr.innerHTML = `
       <td>
@@ -442,7 +361,7 @@ function renderLeadsTable() {
       <td><span class="status-indicator ready"><span class="dot"></span> Ready</span></td>
       <td style="display:flex; gap:6px; align-items:center;">
         <button class="btn btn-ghost btn-small" onclick="event.stopPropagation(); selectLead('${lead.id}')">View</button>
-        <button class="btn btn-danger btn-small" title="Remove prospect" onclick="event.stopPropagation(); deleteLead('${lead.id}')">✕</button>
+        <button class="btn btn-danger btn-small" title="Remove prospect" onclick="event.stopPropagation(); deleteLead('${lead.id}')">âœ•</button>
       </td>
     `;
 
@@ -465,7 +384,7 @@ function selectLead(leadId) {
 
   document.getElementById("seq-vertical-badge").textContent = vertName.toUpperCase();
   document.getElementById("seq-target-name").textContent = lead.businessName;
-  document.getElementById("seq-target-contact").textContent = `${lead.firstName} ${lead.lastName} (${lead.title || "Lead"}) • ${lead.email} • ${lead.phone || ""}`;
+  document.getElementById("seq-target-contact").textContent = `${lead.firstName} ${lead.lastName} (${lead.title || "Lead"}) â€¢ ${lead.email} â€¢ ${lead.phone || ""}`;
 
   const sequence = buildUniversalSequence(lead, client);
   displayTouchStep(sequence, selectedTouchStep);
@@ -480,10 +399,10 @@ function displayTouchStep(sequence, stepNum) {
   document.getElementById("seq-body-input").value = stepData.body;
 
   const labels = {
-    1: "Touch 1 of 4 • Day 1 Send (The Story Hook)",
-    2: "Touch 2 of 4 • Day 4 Send (Why Alternatives Fail)",
-    3: "Touch 3 of 4 • Day 8 Send (Zero-Friction Offer)",
-    4: "Touch 4 of 4 • Day 14 Send (Graceful Exit)"
+    1: "Touch 1 of 4 â€¢ Day 1 Send (The Story Hook)",
+    2: "Touch 2 of 4 â€¢ Day 4 Send (Why Alternatives Fail)",
+    3: "Touch 3 of 4 â€¢ Day 8 Send (Zero-Friction Offer)",
+    4: "Touch 4 of 4 â€¢ Day 14 Send (Graceful Exit)"
   };
   document.getElementById("seq-step-indicator").textContent = labels[stepNum] || `Touch ${stepNum}`;
 
@@ -512,14 +431,14 @@ async function triggerCampaignGeneration() {
   const batchMode = document.getElementById("input-lead-count").value;
 
   triggerBtn.disabled = true;
-  triggerBtn.innerHTML = `<span>⚡ Building Sequences...</span>`;
+  triggerBtn.innerHTML = `<span>âš¡ Building Sequences...</span>`;
 
   logTerminal(`[${client.industry}] Building campaigns for ${client.businessName}...`, "info");
   logTerminal(`Target region: "${city}" | Audience: ${vertical === "all" ? "All ICPs" : vertical}`);
 
   if (batchMode === "expand" && geminiApiKey) {
     // Real AI Lead Discovery
-    logTerminal(`🤖 Calling Gemini AI to discover new real-world prospects...`, "info");
+    logTerminal(`ðŸ¤– Calling Gemini AI to discover new real-world prospects...`, "info");
     try {
       const vertInfo = vertical === "all"
         ? client.targetVerticals
@@ -565,7 +484,7 @@ Return ONLY a valid JSON array of prospect objects (no markdown, no explanation)
         });
         client.leads = [...(client.leads || []), ...newLeads];
         localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
-        logTerminal(`✓ Gemini AI discovered ${newLeads.length} new prospects in "${city}".`, "success");
+        logTerminal(`âœ“ Gemini AI discovered ${newLeads.length} new prospects in "${city}".`, "success");
       }
     } catch (err) {
       logTerminal(`[AI Discovery Error] ${err.message}. Using existing prospects.`, "warning");
@@ -577,7 +496,7 @@ Return ONLY a valid JSON array of prospect objects (no markdown, no explanation)
     await new Promise(r => setTimeout(r, 800));
   }
 
-  logTerminal(`✓ 4-step personalized sequences ready for ${(client.leads || []).length} accounts. Export when ready!`, "success");
+  logTerminal(`âœ“ 4-step personalized sequences ready for ${(client.leads || []).length} accounts. Export when ready!`, "success");
   triggerBtn.disabled = false;
   triggerBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>Trigger Campaign Engine</span>`;
   renderLeadsTable();
@@ -599,6 +518,184 @@ function deleteLead(leadId) {
   logTerminal(`Prospect removed from active campaign list.`, "info");
 }
 
+
+// ============================================================
+// AI: Suggest Better B2B Categories for the Active Client
+// ============================================================
+async function suggestBetterCategories() {
+  if (!geminiApiKey) {
+    alert("A Gemini API key is required. Open the AI Analyzer modal to set one.");
+    return;
+  }
+  const client = getActiveClient();
+  const btn = document.getElementById("btn-suggest-categories");
+  if (btn) { btn.disabled = true; btn.innerHTML = "🔄 Analyzing..."; }
+
+  logTerminal(`🎯 Calling Gemini AI to identify high-value B2B categories for ${client.businessName}...`, "info");
+
+  try {
+    const prompt = `You are an elite B2B Market Strategist with deep expertise in identifying untapped high-value prospect segments.
+
+Analyze this business profile and suggest 6 HIGHLY SPECIFIC, HIGH-VALUE B2B target audience segments. Think beyond the obvious — include niche segments that have high buying power, real urgency, and clear measurable ROI from this exact solution.
+
+Business Profile:
+- Name: ${client.businessName}
+- Industry: ${client.industry}
+- Core Product / Service: ${client.coreProduct}
+- Founder Story: ${client.story}
+- Why Competitors Fail: ${client.whyFails}
+- Zero-Friction CTA: ${client.zeroFrictionCta}
+- Current Targets: ${(client.targetVerticals || []).map(v => v.name).join(", ")}
+
+Rules:
+- At least 3 of the 6 should be DIFFERENT from the current targets
+- Each must have a precise, specific pain point (not generic)
+- Include why this segment has urgency and buying power
+- Include an estimated audience size: Large (10,000+), Medium (1,000-10,000), or Niche (<1,000)
+- Suggest an emoji appropriate to the industry
+
+Return ONLY a valid JSON array (no markdown, no code block):
+[
+  {
+    "id": "v_suggested_1",
+    "name": "Highly specific audience name",
+    "pain": "The exact, specific pain point this business solves for them",
+    "reasoning": "2-sentence explanation: why this segment has high buying power and urgency RIGHT NOW",
+    "audienceSize": "Large",
+    "icon": "🎯"
+  }
+]`;
+
+    const result = await callGeminiApi(prompt, true);
+    let clean = result.trim();
+    if (clean.startsWith("```")) clean = clean.replace(/^```[a-z]*\n?/, "").replace(/\n?```$/, "");
+    const suggestions = JSON.parse(clean);
+    showCategorySuggestionsModal(suggestions, client);
+    logTerminal(`✓ Gemini AI identified ${suggestions.length} high-value target categories for ${client.businessName}!`, "success");
+  } catch (err) {
+    console.error(err);
+    logTerminal(`[Category AI Error] ${err.message}`, "warning");
+    alert(`AI Category Error: ${err.message}`);
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = `🎯 Suggest Better Categories`; }
+  }
+}
+
+function showCategorySuggestionsModal(suggestions, client) {
+  const modal = document.getElementById("category-modal");
+  const container = document.getElementById("category-suggestions-list");
+  if (!modal || !container) return;
+  container.innerHTML = "";
+
+  const existingNames = (client.targetVerticals || []).map(v => v.name.toLowerCase());
+
+  suggestions.forEach((s, i) => {
+    const isExisting = existingNames.some(name => name.includes(s.name.toLowerCase().split(" ")[0].toLowerCase()));
+    const card = document.createElement("div");
+    card.className = "category-suggestion-card" + (isExisting ? " cat-existing" : "");
+    card.innerHTML = `
+      <div class="cat-card-header">
+        <label class="cat-checkbox-label">
+          <input type="checkbox" class="cat-checkbox" data-idx="${i}" ${!isExisting ? "checked" : ""}>
+          <span class="cat-icon">${escapeHtml(s.icon || "🎯")}</span>
+          <strong class="cat-name">${escapeHtml(s.name)}</strong>
+        </label>
+        <span class="audience-size-badge size-${(s.audienceSize || "Medium").toLowerCase()}">${s.audienceSize || "Medium"}</span>
+      </div>
+      <div class="cat-pain">🎯 <strong>Pain Point:</strong> <em>${escapeHtml(s.pain)}</em></div>
+      <div class="cat-reasoning">💡 <strong>Why high-value:</strong> ${escapeHtml(s.reasoning || "")}</div>
+      ${isExisting ? `<div class="cat-existing-note">⚡ Similar to existing category</div>` : ""}
+    `;
+    container.appendChild(card);
+  });
+
+  modal.dataset.suggestions = JSON.stringify(suggestions);
+  modal.classList.add("show");
+}
+
+// ============================================================
+// AI: Generate More Leads for the Active Client
+// ============================================================
+async function generateMoreLeads(count) {
+  if (!geminiApiKey) {
+    alert("A Gemini API key is required. Open the AI Analyzer modal to set one.");
+    return;
+  }
+  const client = getActiveClient();
+  const btn = document.getElementById("btn-generate-more-leads");
+  const origHtml = btn ? btn.innerHTML : "";
+  if (btn) { btn.disabled = true; btn.innerHTML = `<span>🔄 Generating ${count} leads...</span>`; }
+
+  const city = document.getElementById("input-target-city")?.value || "United States";
+  const vertical = document.getElementById("select-vertical")?.value || "all";
+
+  const vertInfo = vertical === "all"
+    ? (client.targetVerticals || [])
+    : (client.targetVerticals || []).filter(v => v.id === vertical);
+  const vertDesc = vertInfo.map(v => `ID="${v.id}" Name="${v.name}" Pain="${v.pain}"`).join("; ");
+  const validVertIds = (client.targetVerticals || []).map(v => v.id);
+
+  logTerminal(`🤖 Generating ${count} new B2B prospects with Gemini AI for ${client.businessName}...`, "info");
+
+  try {
+    const prompt = `You are a B2B lead research specialist with access to business directories and industry databases.
+
+Generate exactly ${count} REALISTIC B2B prospect profiles for the following business. Each must be a plausible real-world company with appropriate decision-maker contacts.
+
+Selling Company: ${client.businessName}
+Industry: ${client.industry}
+Core Offer: ${client.coreProduct}
+Target Audiences: ${vertDesc}
+Geographic Focus: ${city}
+
+STRICT RULES:
+1. Distribute leads EVENLY across ALL ${vertInfo.length} target audience type(s)
+2. Business names must be industry-specific and realistic (not "ABC Company" or generic names)
+3. Decision-maker titles must match the business type (e.g., "Head Athletic Trainer" for a gym, not "CEO")
+4. Email patterns: firstname@businessdomain.com or firstinitial.lastname@domain.com
+5. Phone numbers: realistic area codes for the city, NOT all 555
+6. Include diverse cities/states within the geographic focus
+7. Each lead must be in a DIFFERENT company (no duplicates)
+8. Website domains must match the business name
+
+Return ONLY a valid JSON array of exactly ${count} objects (no markdown, no explanation):
+[
+  {
+    "id": "placeholder",
+    "vertical": "${validVertIds[0] || "v1"}",
+    "businessName": "Real industry-specific business name",
+    "firstName": "FirstName",
+    "lastName": "LastName",
+    "title": "Appropriate decision-maker title",
+    "email": "fname@businessdomain.com",
+    "phone": "(area) ###-####",
+    "city": "City ST",
+    "website": "https://businessdomain.com"
+  }
+]`;
+
+    const resultStr = await callGeminiApi(prompt, true);
+    let cleanStr = resultStr.trim();
+    if (cleanStr.startsWith("```")) cleanStr = cleanStr.replace(/^```[a-z]*\n?/, "").replace(/\n?```$/, "");
+    const newLeads = JSON.parse(cleanStr);
+
+    if (Array.isArray(newLeads) && newLeads.length > 0) {
+      newLeads.forEach((l, i) => { l.id = `lead-gen-${Date.now()}-${i}`; });
+      client.leads = [...(client.leads || []), ...newLeads];
+      localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
+      logTerminal(`✓ Added ${newLeads.length} new prospects to ${client.businessName}! Total: ${client.leads.length}`, "success");
+      renderLeadsTable();
+      updateMetrics();
+      selectLead(newLeads[0].id);
+    }
+  } catch (err) {
+    console.error(err);
+    logTerminal(`[Lead Gen Error] ${err.message}`, "warning");
+    alert(`Lead Generation Error: ${err.message}`);
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = origHtml; }
+  }
+}
 // Export CSV
 function exportCampaignCSV() {
   const client = getActiveClient();
@@ -677,7 +774,7 @@ function exportCampaignJSON() {
 // Copy to Clipboard Helpers
 function copyToClipboard(text, buttonElement, originalHtml) {
   navigator.clipboard.writeText(text).then(() => {
-    buttonElement.innerHTML = `✓ Copied!`;
+    buttonElement.innerHTML = `âœ“ Copied!`;
     setTimeout(() => {
       buttonElement.innerHTML = originalHtml;
     }, 1800);
@@ -767,9 +864,9 @@ function setupEventListeners() {
     const v3Pain = document.getElementById("cust-v3-pain").value.trim() || "rising vendor costs";
 
     const targetVerticals = [
-      { id: "v1", name: v1Name, pain: v1Pain, icon: "🎯" },
-      { id: "v2", name: v2Name, pain: v2Pain, icon: "🚀" },
-      { id: "v3", name: v3Name, pain: v3Pain, icon: "⚡" }
+      { id: "v1", name: v1Name, pain: v1Pain, icon: "ðŸŽ¯" },
+      { id: "v2", name: v2Name, pain: v2Pain, icon: "ðŸš€" },
+      { id: "v3", name: v3Name, pain: v3Pain, icon: "âš¡" }
     ];
 
     // Seed 2 initial sample prospects for the new client
@@ -928,7 +1025,7 @@ function setupEventListeners() {
   // AI Analyzer Modal Open
   const aiModal = document.getElementById("ai-modal");
   document.getElementById("btn-open-ai-analyzer").addEventListener("click", () => {
-    // Pre-populate key — show masked placeholder if using default
+    // Pre-populate key â€” show masked placeholder if using default
     const keyInput = document.getElementById("ai-api-key");
     keyInput.value = geminiApiKey;
     keyInput.placeholder = geminiApiKey === DEFAULT_GEMINI_KEY
@@ -989,7 +1086,7 @@ Research this business thoroughly based on its URL. Identify:
 - What products/services they offer
 - Their likely founder or key representative
 - Their unique value proposition vs. competitors
-- 3 best B2B target audiences (completely relevant to THEIR industry — not sports unless that's their actual niche)
+- 3 best B2B target audiences (completely relevant to THEIR industry â€” not sports unless that's their actual niche)
 - A compelling, authentic origin/credibility story
 - A low-friction lead magnet CTA appropriate for their offer
 - 2 sample realistic prospect profiles for their top target audience
@@ -1014,19 +1111,19 @@ Respond ONLY with a valid JSON object (no markdown, no code blocks):
       "id": "v1",
       "name": "Specific B2B Audience 1 relevant to this business",
       "pain": "Specific pain point that THIS business solves for them",
-      "icon": "🎯"
+      "icon": "ðŸŽ¯"
     },
     {
       "id": "v2",
       "name": "Specific B2B Audience 2 relevant to this business",
       "pain": "Specific pain point that THIS business solves for them",
-      "icon": "🚀"
+      "icon": "ðŸš€"
     },
     {
       "id": "v3",
       "name": "Specific B2B Audience 3 relevant to this business",
       "pain": "Specific pain point that THIS business solves for them",
-      "icon": "⚡"
+      "icon": "âš¡"
     }
   ],
   "leads": [
@@ -1072,7 +1169,7 @@ Respond ONLY with a valid JSON object (no markdown, no code blocks):
       clients[newClientId] = aiProfile;
       localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
 
-      logTerminal(`✓ Gemini AI successfully analyzed ${aiProfile.businessName}!`, "success");
+      logTerminal(`âœ“ Gemini AI successfully analyzed ${aiProfile.businessName}!`, "success");
       logTerminal(`Identified 3 target B2B audiences: ${aiProfile.targetVerticals.map(v => v.name).join(" | ")}`, "info");
 
       aiModal.classList.remove("show");
@@ -1085,7 +1182,7 @@ Respond ONLY with a valid JSON object (no markdown, no code blocks):
       alert(`AI Analysis Error: ${err.message}`);
     } finally {
       runBtn.disabled = false;
-      runBtn.innerHTML = `<span>✨ Run Gemini AI Analysis</span>`;
+      runBtn.innerHTML = `<span>âœ¨ Run Gemini AI Analysis</span>`;
     }
   });
 
@@ -1102,7 +1199,7 @@ Respond ONLY with a valid JSON object (no markdown, no code blocks):
     if (!currentBody) return;
 
     polishBtn.disabled = true;
-    polishBtn.textContent = "✨ Polishing...";
+    polishBtn.textContent = "âœ¨ Polishing...";
 
     logTerminal(`Using Gemini AI to polish and sharpen Touch ${selectedTouchStep}...`, "info");
 
@@ -1130,16 +1227,56 @@ Respond ONLY with a valid JSON object (no markdown, no code block):
       document.getElementById("seq-subject-input").value = polished.subject;
       document.getElementById("seq-body-input").value = polished.body;
 
-      logTerminal(`✓ Touch ${selectedTouchStep} polished by Gemini AI! You can edit further before copying.`, "success");
+      logTerminal(`âœ“ Touch ${selectedTouchStep} polished by Gemini AI! You can edit further before copying.`, "success");
     } catch (err) {
       console.error(err);
       logTerminal(`[AI Polish Error] ${err.message}`, "warning");
     } finally {
       polishBtn.disabled = false;
-      polishBtn.textContent = "✨ AI Polish Touch";
+      polishBtn.textContent = "âœ¨ AI Polish Touch";
     }
   });
 
+  // Suggest Better Categories button
+  document.getElementById("btn-suggest-categories")?.addEventListener("click", suggestBetterCategories);
+
+  // Generate More Leads dropdown buttons
+  document.getElementById("btn-generate-10")?.addEventListener("click", () => generateMoreLeads(10));
+  document.getElementById("btn-generate-25")?.addEventListener("click", () => generateMoreLeads(25));
+
+  // Category Suggestions Modal
+  document.getElementById("btn-close-category-modal")?.addEventListener("click", () => {
+    document.getElementById("category-modal")?.classList.remove("show");
+  });
+  document.getElementById("btn-cancel-category-modal")?.addEventListener("click", () => {
+    document.getElementById("category-modal")?.classList.remove("show");
+  });
+  document.getElementById("btn-save-categories")?.addEventListener("click", () => {
+    const modal = document.getElementById("category-modal");
+    const suggestions = JSON.parse(modal.dataset.suggestions || "[]");
+    const checkboxes = modal.querySelectorAll(".cat-checkbox");
+    const selected = [];
+    checkboxes.forEach((cb, i) => {
+      if (cb.checked && suggestions[i]) {
+        const s = suggestions[i];
+        selected.push({ id: `v_ai_${Date.now()}_${i}`, name: s.name, pain: s.pain, icon: s.icon || "🎯" });
+      }
+    });
+    if (selected.length === 0) { alert("Please select at least one category to apply."); return; }
+    const replaceMode = document.getElementById("cat-replace-mode")?.checked;
+    const client = getActiveClient();
+    if (replaceMode) {
+      client.targetVerticals = selected;
+    } else {
+      const existingNames = (client.targetVerticals || []).map(v => v.name.toLowerCase());
+      const toAdd = selected.filter(s => !existingNames.includes(s.name.toLowerCase()));
+      client.targetVerticals = [...(client.targetVerticals || []), ...toAdd];
+    }
+    localStorage.setItem("apex_universal_clients", JSON.stringify(clients));
+    modal.classList.remove("show");
+    loadClient(activeClientId);
+    logTerminal(`✓ Applied ${selected.length} AI-suggested target categories. Sequences updated!`, "success");
+  });
   // Delete active client profile
   document.getElementById("btn-delete-client")?.addEventListener("click", () => {
     const client = getActiveClient();
